@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id('id_pemesanan');
             $table->integer('kode_pemesanan');
             $table->date('tanggal_pemesanan');
-            $table->foreign('id_pelanggan')->references('id_penumpang')->on('penumpangs');
+            $table->foreignId('id_pelanggan')->references('id_penumpang')->on('penumpangs');
             $table->integer('kode_kursi');
             $table->integer('id_rute');
             $table->integer('tujuan');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('jam_cekin');
             $table->date('jam_berangkat');
             $table->integer('total_bayar');
-            $table->foreign('id_petugas')->references('id_petugas')->on('petugas');
+            $table->foreignId('id_petugas')->references('id_petugas')->on('petugas');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('username');
             $table->string('password');
             $table->string('nama_petugas');
-            $table->foreign('id_level')->reference('id_level')->on('levels');
+            $table->foreignId('id_level')->reference('id_level')->on('levels');
         });
     }
 
