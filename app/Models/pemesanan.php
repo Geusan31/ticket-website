@@ -15,4 +15,8 @@ class pemesanan extends Model
     {
         return $this->belongsTo(penumpang::class);
     }
+
+    public function rute(): BelongsTo {
+        return $this->belongsTo(Rute::class);
+    }
 }

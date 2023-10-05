@@ -24,7 +24,6 @@ return new class extends Migration
             $table->date('jam_berangkat');
             $table->integer('total_bayar');
             $table->foreignId('id_petugas')->references('id_petugas')->on('petugas');
-            $table->timestamps();
         });
     }
 
