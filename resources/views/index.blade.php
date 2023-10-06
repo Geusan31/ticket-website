@@ -1,3 +1,5 @@
-@section('section')
-  <h1>Hallo</h1>
+@extends('layouts.main')
+
+@section('container')
+  <h1 class="text-3xl">Hallo</h1>
 @endsection
