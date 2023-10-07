@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class penumpang extends Model
 {
     use HasFactory;
+    public $timestamps = false;
+    protected $guarded = ['id_penumpang'];
+    protected $table = 'penumpangs';
 
     public function pemesanan(): HasMany
     {
