@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('petugas', function (Blueprint $table) {
             $table->id('id_petugas');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('nama_petugas');
-            $table->foreignId('id_level')->reference('id_level')->on('levels');
+            $table->foreignId('id_level')->references('id_level')->on('levels');
         });
     }
 

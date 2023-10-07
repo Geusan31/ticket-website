@@ -13,9 +13,10 @@ return new class extends Migration
     {
         Schema::create('penumpangs', function (Blueprint $table) {
             $table->id('id_penumpang');
-            $table->string('username');
+            $table->string('username')->unique();
             $table->string('password');
             $table->string('alamat_penumpang');
+            $table->string('nama_penumpang');
             $table->string('tanggal_lahir');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->string('telephone');

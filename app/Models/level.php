@@ -10,8 +10,12 @@ class level extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id_level'];
+    protected $table = 'levels';
+    public $timestamps = false;
+
     public function petugas(): HasMany
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(petugas::class);
     }
 }

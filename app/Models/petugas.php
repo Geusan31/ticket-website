@@ -10,6 +10,9 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class petugas extends Model
 {
     use HasFactory;
+    protected $guarded = ['id_petugas'];
+    public $timestamps = false;
+    protected $table = 'petugas';
 
     public function level(): BelongsTo {
         return $this->belongsTo(level::class);
