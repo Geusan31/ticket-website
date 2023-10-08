@@ -4,7 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\level;
+use App\Models\Level;
+use App\Models\Penumpang;
+use App\Models\Petugas;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -21,6 +23,10 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        level::factory(2)->create();
+        Level::factory(2)->create();
+
+        Petugas::factory(5)->create();
+
+        Penumpang::factory(5)->create();
     }
 }

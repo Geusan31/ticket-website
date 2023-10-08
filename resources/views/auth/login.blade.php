@@ -13,7 +13,7 @@
     <div class="w-full min-h-screen">
         <div class="flex min-h-screen flex-row w-full shadow-lg">
             <div class="w-full lg:w-1/2 flex items-center justify-center bg-no-repeat bg-cover bg-center"
-                style="background-image: url('{{ asset('assets/img/aircraft.jpg') }}')">
+                style="background-image: url('{{ asset('assets/img/aircraft.webp') }}')">
                 <div
                     class="w-full h-full flex flex-col p-12 justify-center items-center relative backdrop-brightness-[.4]">
                     <a href="/"

@@ -33,6 +33,8 @@ class LoginController extends Controller
             // session(['role' => 'penumpang']);
             session(['role' => 'petugas']);
 
+            // dd(session()->all());
+
             return redirect()->intended('/');
         }
 
