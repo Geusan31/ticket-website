@@ -14,8 +14,8 @@ return [
     */
 
     'defaults' => [
-        'guard' => 'web',
-        'passwords' => 'users',
+        'guard' => 'penumpang',
+        // 'passwords' => 'users',
     ],
 
     /*
@@ -36,9 +36,13 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'petugas' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'petugas',
+        ],
+        'penumpang' => [
+            'driver' => 'session',
+            'provider' => 'penumpangs',
         ],
     ],
 
@@ -60,15 +64,14 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'petugas' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Petugas::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
+        'penumpangs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Penumpang::class,
+        ],
     ],
 
     /*

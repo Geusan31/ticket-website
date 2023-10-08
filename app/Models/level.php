@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class level extends Model
+class Level extends Model
 {
     use HasFactory;
 
@@ -16,6 +16,6 @@ class level extends Model
 
     public function petugas(): HasMany
     {
-        return $this->hasMany(petugas::class);
+        return $this->hasMany(Petugas::class);
     }
 }
