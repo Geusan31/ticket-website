@@ -12,10 +12,10 @@ class Rute extends Model
     use HasFactory;
 
     public function pemesanan(): HasMany {
-        return $this->hasMany(pemesanan::class);
+        return $this->hasMany(Pemesanan::class);
     }
 
     public function tranportasi(): BelongsTo {
-        return $this->belongsTo(transportasi::class);
+        return $this->belongsTo(Transportasi::class);
     }
 }

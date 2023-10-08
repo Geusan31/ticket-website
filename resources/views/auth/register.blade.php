@@ -38,7 +38,8 @@
                 <form action="/register" method="post" id="myForm">
                     @csrf
                     <select id="role" name="role"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2" value="{{ old('role') }}">
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
+                        value="{{ old('role') }}">
                         <option selected disabled>Pilih Role</option>
                         <option value="penumpang">Penumpang</option>
                         <option value="petugas">Petugas</option>
@@ -196,6 +197,8 @@
                         <button type="submit"
                             class="w-full bg-blue-500 rounded-lg py-3 text-center text-white font-semibold">Buat
                             Akun</button>
+                        <p class="text-center mt-5">Sudah punya akun? <a href="/login" class="text-blue-600">Log in
+                                aja</a></p>
                     </div>
                 </form>
             </div>

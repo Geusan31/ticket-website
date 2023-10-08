@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string("kode");
             $table->string("jumlah_kursi");
             $table->string("keterangan");
-            $table->foreignId("id_type_transportasi")->references("id_type_transportasi")->on("type_transportasi");
+            $table->foreignId("id_type_transportasi");
         });
     }
 

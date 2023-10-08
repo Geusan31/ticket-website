@@ -41,7 +41,7 @@ class RegisterController extends Controller
 
             penumpang::create($result);
 
-            return redirect('/');
+            return redirect('/login');
         } else if ($role == 'petugas') {
             // dd($request->all());
             $result = $request->validate([
@@ -57,7 +57,7 @@ class RegisterController extends Controller
 
 
             petugas::create($result);
-            return redirect('/');
+            return redirect('/login');
         }
     }
 }

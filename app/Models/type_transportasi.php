@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class type_transportasi extends Model
+class Type_transportasi extends Model
 {
     use HasFactory;
 
     public function type_treansportasi(): HasMany {
-        return $this->hasMany(transportasi::class);
+        return $this->hasMany(Transportasi::class);
     }
 }
