@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('password');
             $table->string('nama_petugas');
             $table->foreignId('id_level');
+            $table->boolean('is_logged_in')->default(false);
             $table->rememberToken();
         });
     }

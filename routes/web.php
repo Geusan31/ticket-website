@@ -3,6 +3,8 @@
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\RuteController;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,5 +31,13 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest:petug
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
+// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('cekPetugas');
+Route::group(['middleware' => ['cekPetugas']], function() {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::resource('/dashboard/rute', RuteController::class);
+});
 
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('petugas');
+Route::get('/test', function () {
+    Log::info('This is a test message');
+    return 'Check the log file';
+});
