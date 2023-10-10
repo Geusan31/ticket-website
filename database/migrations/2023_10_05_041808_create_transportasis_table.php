@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('transportasis', function (Blueprint $table) {
             $table->id("id_transportasi");
-            $table->string("kode");
+            $table->string("kode")->unique();
             $table->string("jumlah_kursi");
             $table->string("keterangan");
             $table->foreignId("id_type_transportasi");

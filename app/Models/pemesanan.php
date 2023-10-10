@@ -11,6 +11,11 @@ class Pemesanan extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id_pemesanan'];
+    public $timestamps = false;
+    protected $primaryKey = 'id_pemesanan';
+    protected $table = 'pemesanans';
+
     public function penumpang(): BelongsTo
     {
         return $this->belongsTo(Penumpang::class);

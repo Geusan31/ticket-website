@@ -16,24 +16,23 @@
             <a href="/dashboard/rute"
                 class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                 <i class="fa-solid fa-route mr-3 text-lg"></i>
-                {{-- <i class="ri-settings-2-line mr-3 text-lg"></i> --}}
                 <span class="text-sm">Rute</span>
             </a>
         </li>
         <li class="mb-1 group">
-            <a href="#"
+            <a href="/dashboard/transportasi"
                 class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
-                <i class="ri-settings-2-line mr-3 text-lg"></i>
+                <i class="fa-solid fa-car mr-3 text-lg"></i>
                 <span class="text-sm">Transportasi</span>
             </a>
         </li>
-        <li class="mb-1 group">
+        {{-- <li class="mb-1 group">
             <a href="#"
                 class="flex items-center py-2 px-4 text-gray-300 hover:bg-gray-950 hover:text-gray-100 rounded-md group-[.active]:bg-gray-800 group-[.active]:text-white group-[.selected]:bg-gray-950 group-[.selected]:text-gray-100">
                 <i class="ri-settings-2-line mr-3 text-lg"></i>
                 <span class="text-sm">Settings</span>
             </a>
-        </li>
+        </li> --}}
     </ul>
 </div>
 <div class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden sidebar-overlay"></div>

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\type_transportasi>
  */
-class TypeTransportasiFactory extends Factory
+class Type_TransportasiFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,7 +17,8 @@ class TypeTransportasiFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama_type' => $this->faker->randomElement(['kereta_api', 'pesawat']),
+            'keterangan' => $this->faker->sentence(),
         ];
     }
 }

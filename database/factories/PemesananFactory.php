@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Rute;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,21 @@ class PemesananFactory extends Factory
      */
     public function definition(): array
     {
+
+        $rute = Rute::factory()->create();
+
         return [
-            //
+            'kode_pemesanan' => $this->faker->unique()->randomNumber(2),
+            'tanggal_pemesanan' => $this->faker->date(),
+            'id_pelanggan' => mt_rand(1, 5),
+            'kode_kursi' => $this->faker->numberBetween(30, 60),
+            'id_rute' => $rute->id_rute,
+            'tujuan' => $rute->tujuan,
+            'tanggal_berangkat' => $this->faker->date(),
+            'jam_cekin' => $this->faker->dateTime(),
+            'jam_berangkat' => $this->faker->dateTime(),
+            'total_bayar' => $this->faker->randomNumber(4),
+            'id_petugas' => mt_rand(1, 5),
         ];
     }
 }

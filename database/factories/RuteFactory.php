@@ -16,9 +16,14 @@ class RuteFactory extends Factory
      */
     public function definition(): array
     {
+        $city = $this->faker->city();
+
         return [
-            'tujuan' => $this->faker->city(),
-            'rute_awal' => $this->faker
+            'tujuan' => $city,
+            'rute_awal' => $this->faker->city(),
+            'rute_akhir' => $city,
+            'harga' => $this->faker->randomNumber(6),
+            'id_transportasi' => mt_rand(1, 5),
         ];
     }
 }
