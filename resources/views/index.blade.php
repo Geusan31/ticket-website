@@ -21,6 +21,50 @@
     </div>
     <!-- Jumbotron -->
     </section>
+    <section class="w-full mt-5 relative">
+        <h1>Jelajahi Tempat yang menarik di ASEAN</h1>
+        <div class="grid grid-cols-3 gap-5">
+            <div
+                class="w-full bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply py-20 px-10">
+                <div class="px-4 mx-auto max-w-screen-xl text-center">
+                    <h1 class="mb-4 leading-none text-white">
+                        We invest in the world’s potential</h1>
+                    <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
+                        <a href="#"
+                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+                            Get started
+                            <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="none" viewBox="0 0 14 10">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
+                            </svg>
+                        </a>
+                        <a href="#"
+                            class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
+                            Learn more
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{-- <div
+            class="block rounded-lg bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)]">
+            <img class="rounded-lg" src="https://tecdn.b-cdn.net/img/new/slides/017.webp" alt="" />
+            <div class="absolute top-0 p-6">
+                <h5 class="mb-2 text-xl font-medium leading-tight text-white">
+                    Card title
+                </h5>
+                <p class="mb-4 text-base text-white">
+                    This is a wider card with supporting text below as a natural
+                    lead-in to additional content. This content is a little bit
+                    longer.
+                </p>
+                <p class="text-base text-white">
+                    <small class="text-white">Last updated 3 mins ago</small>
+                </p>
+            </div>
+        </div> --}}
+    </section>
     <!-- Section: Design Block -->
     @if (Auth::guard('penumpang')->check())
         <h1>Anda berhasil login sebagai penumpang</h1>
