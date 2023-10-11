@@ -12,7 +12,7 @@ class RuteController extends Controller
      */
     public function index()
     {
-        return view('dashboard.rute', [
+        return view('dashboard.rute.index', [
             'title' => 'Rute',
             'rutes' => Rute::all()
         ]);
@@ -23,7 +23,10 @@ class RuteController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.rute.create', [
+            'title' => 'Create Rute',
+            'rutes' => Rute::all()
+        ]);
     }
 
     /**
@@ -31,7 +34,17 @@ class RuteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result = $request->validate([
+            'id_transportasi' => 'required',
+            'tujuan' => 'required',
+            'rute_awal' => 'required',
+            'rute_akhir' => 'required',
+            'harga' => 'required',
+        ]);
+
+        Rute::create($result);
+
+        return redirect('/dashboard/rute')->with('success', 'Data berhasil di tambah');
     }
 
     /**

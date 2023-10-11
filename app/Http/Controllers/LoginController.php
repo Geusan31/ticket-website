@@ -59,7 +59,9 @@ class LoginController extends Controller
         }
 
         if (Auth::guard('petugas')->check()) {
-            $petugas = Petugas::find(Auth::id());
+            // $petugas = Petugas::find(Auth::id());
+            dd(Auth::id());
+            dd(Petugas::find(1));
             $petugas->is_logged_in = false;
             $petugas->save();
         }

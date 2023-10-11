@@ -12,7 +12,7 @@ class TransportasiController extends Controller
      */
     public function index()
     {
-        return view('dashboard.transportasi', [
+        return view('dashboard.transportasi.index', [
             'title' => 'Transportasi',
             'transportasi' => Transportasi::all()
         ]);
@@ -23,7 +23,10 @@ class TransportasiController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.transportasi.create', [
+            'title' => 'Transportasi Create',
+            'transportasis' => Transportasi::all()
+        ]);
     }
 
     /**
@@ -31,7 +34,16 @@ class TransportasiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $result = $request->validate([
+            'kode' => 'required',
+            'jumlah_kursi' => 'required',
+            'keterangan' => 'required',
+            'id_type_transportasi' => 'required',
+        ]);
+
+        Transportasi::create($result);
+
+        return redirect('/dashboard/transportasi')->with('success', 'Data berhasil di tambah');
     }
 
     /**
