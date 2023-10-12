@@ -21,29 +21,28 @@
     </div>
     <!-- Jumbotron -->
     </section>
-    <section class="w-full mt-5 relative">
-        <h1>Jelajahi Tempat yang menarik di ASEAN</h1>
+    <section class="w-full mt-8 relative px-5 md:px-[10vw]">
+        <h1 class="mb-4 text-xl font-semibold">Jelajahi Tempat yang menarik di ASEAN</h1>
         <div class="grid grid-cols-3 gap-5">
             <div
-                class="w-full bg-center bg-no-repeat bg-[url('https://flowbite.s3.amazonaws.com/docs/jumbotron/conference.jpg')] bg-gray-700 bg-blend-multiply py-20 px-10">
-                <div class="px-4 mx-auto max-w-screen-xl text-center">
-                    <h1 class="mb-4 leading-none text-white">
-                        We invest in the world’s potential</h1>
-                    <div class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                        <a href="#"
-                            class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
-                            Get started
-                            <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                                fill="none" viewBox="0 0 14 10">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M1 5h12m0 0L9 1m4 4L9 9" />
-                            </svg>
-                        </a>
-                        <a href="#"
-                            class="inline-flex justify-center hover:text-gray-900 items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg border border-white hover:bg-gray-100 focus:ring-4 focus:ring-gray-400">
-                            Learn more
-                        </a>
-                    </div>
+                class="w-full bg-cover bg-no-repeat bg-gray-400 bg-blend-multiply pb-32 pt-10 px-2 rounded-lg" style="background-position:50%; background-image: url('{{asset('/assets/img/singapura.jpg')}}')">
+                <div class="px-4 mx-auto max-w-screen-xl text-left">
+                    <h1 class="mb-2 leading-none text-white text-2xl font-semibold">Singapore</h1>
+                    <p class="text-white">644 Wisata</p>
+                </div>
+            </div>
+            <div
+                class="w-full bg-cover bg-no-repeat bg-gray-400 bg-blend-multiply pb-32 pt-10 px-2 rounded-lg" style="background-position:50%; background-image: url('{{asset('/assets/img/malaysia.webp')}}')">
+                <div class="px-4 mx-auto max-w-screen-xl text-left">
+                    <h1 class="mb-2 leading-none text-white text-2xl font-semibold">Malaysia</h1>
+                    <p class="text-white">8.371 Wisata</p>
+                </div>
+            </div>
+            <div
+                class="w-full bg-cover bg-no-repeat bg-gray-400 bg-blend-multiply pb-32 pt-10 px-2 rounded-lg" style="background-position:50%; background-image: url('{{asset('/assets/img/thailand.webp')}}')">
+                <div class="px-4 mx-auto max-w-screen-xl text-left">
+                    <h1 class="mb-2 leading-none text-white text-2xl font-semibold">Thailand</h1>
+                    <p class="text-white">27.449 Wisata</p>
                 </div>
             </div>
         </div>
