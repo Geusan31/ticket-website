@@ -16,12 +16,16 @@ class Pemesanan extends Model
     protected $primaryKey = 'id_pemesanan';
     protected $table = 'pemesanans';
 
-    public function penumpang(): BelongsTo
+    public function penumpang(): HasMany
     {
-        return $this->belongsTo(Penumpang::class);
+        return $this->hasMany(penumpang::class, 'id_penumpang');
     }
 
     public function rute(): BelongsTo {
-        return $this->belongsTo(Rute::class);
+        return $this->belongsTo(Rute::class, 'id_rute');
+    }
+
+    public function petugas(): BelongsTo {
+        return $this->belongsTo(petugas::class, 'id_petugas');
     }
 }

@@ -23,6 +23,7 @@ return new class extends Migration
             $table->date('jam_cekin');
             $table->date('jam_berangkat');
             $table->integer('total_bayar');
+            $table->enum('validate', ['pending', 'success'])->default('pending');
             $table->foreignId('id_petugas')->references('id_petugas')->on('petugas');
         });
     }

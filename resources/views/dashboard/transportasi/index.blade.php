@@ -30,7 +30,7 @@
                     <th scope="col" class="px-6 py-3">
                         Jumlah Kursi
                     </th>
-                    <th scope="col" class="px-6 py-3">
+                    <th scope="col" class="px-6 py-3"> //ganti dengan rute!
                         Keterangan
                     </th>
                     <th scope="col" class="px-6 py-3">

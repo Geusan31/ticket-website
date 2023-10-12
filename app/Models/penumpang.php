@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 // use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Penumpang extends Authenticatable
 {
@@ -16,8 +17,8 @@ class Penumpang extends Authenticatable
     protected $table = 'penumpangs';
     protected $primaryKey = 'id_penumpang';
 
-    public function pemesanan(): HasMany
+    public function pemesanan(): BelongsTo
     {
-        return $this->hasMany(Pemesanan::class);
+        return $this->belongsTo(Pemesanan::class, 'id_pemesanan');
     }
 }

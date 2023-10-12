@@ -5,6 +5,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuteController;
 use App\Http\Controllers\TransportasiController;
+use App\Http\Controllers\ValidateController;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
@@ -37,6 +38,7 @@ Route::group(['middleware' => ['cekPetugas']], function() {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('/dashboard/rute', RuteController::class);
     Route::resource('/dashboard/transportasi', TransportasiController::class);
+    Route::get('/dashboard/validate', [ValidateController::class, 'index']);
 });
 
 Route::get('/test', function () {
