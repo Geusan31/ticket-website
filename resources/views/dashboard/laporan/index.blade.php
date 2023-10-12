@@ -1,6 +1,10 @@
 @extends('dashboard.layouts.main')
 
 @section('container')
+    <div class="flex justify-between items-center w-full mb-3">
+        <a href="/dashboard/laporan_pemesanan"
+            class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Download Laporan</a>
+    </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500">
             <thead class="text-xs text-gray-700 uppercase bg-gray-50">
@@ -41,9 +45,6 @@
                     <th scope="col" class="px-6 py-3">
                         Status
                     </th>
-                    <th scope="col" class="px-6 py-3">
-                        Action
-                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -82,21 +83,9 @@
                         <td class="px-6 py-4">
                             {{ $pemesanan->petugas->nama_petugas }}
                         </td>
-                        <td class="px-6 py-4 font-semibold capitalize {{ $pemesanan->validate == 'success' ? 'text-green-500' : 'text-gray-400' }}">
+                        <td
+                            class="px-6 py-4 font-semibold capitalize {{ $pemesanan->validate == 'success' ? 'text-green-500' : 'text-gray-400' }}">
                             {{ $pemesanan->validate }}
-                        </td>
-                        <td class="px-6 py-4 w-[9%]">
-                            <form action="/dashboard/validate/{{ $pemesanan->id_pemesanan }}" method="post">
-                                @csrf
-                                @method('PUT')
-                                <select id="validate" name="validate" onchange="this.form.submit()"
-                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                                    <option value="1" {{ $pemesanan->validate == 'pending' ? 'selected' : '' }}>
-                                        Pending</option>
-                                    <option value="2" {{ $pemesanan->validate == 'success' ? 'selected' : '' }}>
-                                        Success</option>
-                                </select>
-                            </form>
                         </td>
                     </tr>
                 @endforeach

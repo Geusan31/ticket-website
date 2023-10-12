@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuteController;
 use App\Http\Controllers\TransportasiController;
@@ -39,6 +41,9 @@ Route::group(['middleware' => ['cekPetugas']], function() {
     Route::resource('/dashboard/rute', RuteController::class);
     Route::resource('/dashboard/transportasi', TransportasiController::class);
     Route::get('/dashboard/validate', [ValidateController::class, 'index']);
+    Route::put('/dashboard/validate/{id}', [PemesananController::class, 'update']);
+    Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
+    Route::get('/dashboard/laporan_pemesanan', [LaporanController::class, 'print']);
 });
 
 Route::get('/test', function () {
