@@ -2,7 +2,7 @@
 
 @section('container')
     @if (session()->has('success'))
-        <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+        <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
             role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
@@ -30,8 +30,8 @@
                     <th scope="col" class="px-6 py-3">
                         Jumlah Kursi
                     </th>
-                    <th scope="col" class="px-6 py-3"> //ganti dengan rute!
-                        Keterangan
+                    <th scope="col" class="px-6 py-3">
+                        Rute
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Type Transportasi
@@ -48,10 +48,12 @@
                             {{ $transpor->jumlah_kursi }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $transpor->keterangan }}
+                            @foreach ($transpor->rute as $rute)
+                                {{ $rute->rute_awal }} - {{ $rute->rute_akhir }}
+                            @endforeach
                         </td>
                         <td class="px-6 py-4">
-                            {{ $transpor->type_transportasi->nama_type }}
+                            {{ $transpor->type_transportasi->nama_type }} - {{ $transpor->type_transportasi->keterangan }}
                         </td>
                     </tr>
                 @endforeach

@@ -12,12 +12,12 @@ class LaporanController extends Controller
     public function index() {
         return view('dashboard.laporan.index', [
             'title' => 'Validate',
-            'pemesanans' => Pemesanan::all(),
+            'pemesanans' => Pemesanan::where('validate', 'success')->get(),
         ]);
     }
 
     public function print() {
-        $pemesanan = Pemesanan::all();
+        $pemesanan = Pemesanan::where('validate', 'success')->get();
 
         $pdf = FacadePdf::loadview('dashboard.laporan.laporan_pemesanan', ['pemesanans' => $pemesanan])->setPaper('A4', 'landscape');
 

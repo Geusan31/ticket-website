@@ -14,7 +14,11 @@ class Type_transportasi extends Model
     protected $primaryKey = 'id_type_transportasi';
     protected $table = 'type_transportasis';
 
-    public function type_treansportasi(): HasMany {
-        return $this->hasMany(Transportasi::class);
+    public function rute(): HasMany {
+        return $this->hasMany(Rute::class, 'id_rute');
+    }
+
+    public function transportasi(): HasMany {
+        return $this->hasMany(Rute::class, 'id_transportasi');
     }
 }

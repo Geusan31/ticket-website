@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id("id_transportasi");
             $table->string("kode")->unique();
             $table->string("jumlah_kursi");
-            $table->string("keterangan");
+            $table->foreignId("id_rute");
             $table->foreignId("id_type_transportasi");
         });
     }

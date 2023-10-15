@@ -2,24 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Rute;
 use App\Models\Type_transportasi;
 use Illuminate\Http\Request;
 
-class RuteController extends Controller
+class Type_TransportasiController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        // $rutes = Rute::all();
-        // foreach ($rutes as $rute) {
-        //     dd($rute->type_transportasi);
-        // }
-        return view('dashboard.rute.index', [
-            'title' => 'Rute',
-            'rutes' => Rute::all()
+        return view('dashboard.type_transportasi.index', [
+            'title' => 'Type Transportasi',
+            'type_transportasis' => Type_transportasi::all()
         ]);
     }
 
@@ -28,13 +23,8 @@ class RuteController extends Controller
      */
     public function create()
     {
-        $usedRoutes = Rute::pluck('id_type_transportasi');
-
-        $availableRoutes = Type_transportasi::whereNotIn('id_type_transportasi', $usedRoutes)->get();
-
-        return view('dashboard.rute.create', [
-            'title' => 'Create Rute',
-            'rutes' => $availableRoutes
+        return view('dashboard.type_transportasi.create', [
+            'title' => 'Create type transportasi',
         ]);
     }
 
@@ -44,16 +34,13 @@ class RuteController extends Controller
     public function store(Request $request)
     {
         $result = $request->validate([
-            'id_type_transportasi' => 'required',
-            'tujuan' => 'required',
-            'rute_awal' => 'required',
-            'rute_akhir' => 'required',
-            'harga' => 'required',
+            'nama_type' => 'required',
+            'keterangan' => 'required',
         ]);
 
-        Rute::create($result);
+        Type_Transportasi::create($result);
 
-        return redirect('/dashboard/rute')->with('success', 'Data berhasil di tambah');
+        return redirect('/dashboard/type_transportasi')->with('success', 'Data berhasil di tambah');
     }
 
     /**

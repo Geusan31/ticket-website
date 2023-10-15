@@ -17,7 +17,7 @@ class Transportasi extends Model
 
     public function rute(): HasMany
     {
-        return $this->hasMany(Rute::class);
+        return $this->hasMany(Rute::class, 'id_rute');
     }
 
     public function type_transportasi(): BelongsTo

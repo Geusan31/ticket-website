@@ -89,14 +89,14 @@
                             aria-current="page">Home</a>
                     </li>
                     <li class="pt-3 md:pl-4 md:pr-3 md:pt-0">
-                        <a href="/pesawat"
-                            class="{{ Request::is('/pesawat') ? 'bg-blue-700 text-white md:text-blue-700' : 'hover:bg-gray-100 md:hover:text-blue-700 text-gray-900' }} block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0"
+                        <a href="#pemesanan" id="pesawatNav"
+                            class="block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0"
                             aria-current="page">Pesawat</a>
                     </li>
                 </div>
                 <li class="!ml-0">
-                    <a href="/kereta-api"
-                        class="{{ Request::is('/kereta-api') ? 'bg-blue-700 text-white md:text-blue-700' : 'hover:bg-gray-100 md:hover:text-blue-700 text-gray-900' }} block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0"
+                    <a href="#pemesanan" id="keretaApiNav"
+                        class="block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0"
                         aria-current="page">Kereta api</a>
                 </li>
             </ul>

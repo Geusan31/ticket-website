@@ -10,7 +10,7 @@
 
   @include('partials.navbar')
 
-  <div class="h-[200vh]">
+  <div class="min-h-screen">
     @yield('container')
   </div>
   

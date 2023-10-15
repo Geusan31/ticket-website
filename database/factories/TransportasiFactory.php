@@ -16,11 +16,21 @@ class TransportasiFactory extends Factory
      */
     public function definition(): array
     {
+        static $rutes = [1, 2, 3, 4 ,5];
+
+        if(empty($rutes)) {
+            $rutes = [1, 2, 3, 4, 5];
+        }
+
+        $key = array_rand($rutes);
+        $rute = $rutes[$key];
+        unset($rutes[$key]);
+
         return [
             'kode' => $this->faker->unique()->randomNumber(5),
             'jumlah_kursi' => $this->faker->numberBetween(30, 60),
-            'keterangan' => $this->faker->sentence(),
-            'id_type_transportasi' => mt_rand(1, 5),
+            'id_rute' => $rute,
+            'id_type_transportasi' => $rute,
         ];
     }
 }

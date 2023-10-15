@@ -18,12 +18,22 @@ class RuteFactory extends Factory
     {
         $city = $this->faker->city();
 
+        static $rutes = [1, 2, 3, 4 ,5];
+
+        if(empty($rutes)) {
+            $rutes = [1, 2, 3, 4, 5];
+        }
+
+        $key = array_rand($rutes);
+        $rute = $rutes[$key];
+        unset($rutes[$key]);
+
         return [
             'tujuan' => $city,
             'rute_awal' => $this->faker->city(),
             'rute_akhir' => $city,
             'harga' => $this->faker->randomNumber(6),
-            'id_transportasi' => mt_rand(1, 5),
+            'id_type_transportasi' => $rute,
         ];
     }
 }

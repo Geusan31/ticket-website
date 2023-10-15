@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Rute;
 use App\Models\Transportasi;
 use Illuminate\Http\Request;
 
@@ -12,6 +13,12 @@ class TransportasiController extends Controller
      */
     public function index()
     {
+        // foreach (Transportasi::all() as $transpor) {
+        //     dump($transpor->rute);
+        //     foreach ($transpor->rute as $rute) {
+        //         dump($rute->rute_awal, $rute->rute_akhir);
+        //     }
+        // }
         return view('dashboard.transportasi.index', [
             'title' => 'Transportasi',
             'transportasi' => Transportasi::all()
@@ -23,9 +30,14 @@ class TransportasiController extends Controller
      */
     public function create()
     {
+        $usedRoutes = Transportasi::pluck('id_rute');
+
+        $availableRoutes = Rute::whereNotIn('id_rute', $usedRoutes)->get();
+        
         return view('dashboard.transportasi.create', [
             'title' => 'Transportasi Create',
-            'transportasis' => Transportasi::all()
+            'transportasis' => Transportasi::all(),
+            'rutes' => $availableRoutes
         ]);
     }
 
@@ -35,9 +47,9 @@ class TransportasiController extends Controller
     public function store(Request $request)
     {
         $result = $request->validate([
-            'kode' => 'required',
+            'kode' => 'required|unique:transportasis',
             'jumlah_kursi' => 'required',
-            'keterangan' => 'required',
+            'id_rute' => 'required',
             'id_type_transportasi' => 'required',
         ]);
 

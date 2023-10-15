@@ -21,8 +21,8 @@ class Rute extends Model
         return $this->hasMany(Pemesanan::class);
     }
 
-    public function transportasi(): BelongsTo
+    public function type_transportasi(): BelongsTo
     {
-        return $this->belongsTo(Transportasi::class, 'id_transportasi');
+        return $this->belongsTo(Type_transportasi::class, 'id_type_transportasi');
     }
 }

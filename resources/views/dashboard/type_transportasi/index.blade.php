@@ -2,7 +2,8 @@
 
 @section('container')
     @if (session()->has('success'))
-        <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+        <div class="flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50"
+            role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
                 <path
@@ -15,9 +16,9 @@
         </div>
     @endif
     <div class="flex justify-between items-center w-full mb-3">
-        <a href="/dashboard/rute/create"
+        <a href="/dashboard/type_transportasi/create"
             class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Tambah
-            data rute</a>
+            data type transportasi</a>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500">
@@ -27,43 +28,24 @@
                         Id
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Tujuan
+                        Nama Type
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Rute Awal
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Rute Akhir
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Harga
-                    </th>
-                    <th scope="col" class="px-6 py-3">
-                        Type Transportasi
+                        Keterangan
                     </th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($rutes as $rute)
+                @foreach ($type_transportasis as $type)
                     <tr class="bg-white border-b">
                         <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
-                            {{ $rute->id_rute }}
+                            {{ $type->id_type_transportasi }}
                         </th>
-                        <th class="px-6 py-4">
-                            {{ $rute->tujuan }}
+                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            {{ $type->nama_type }}
                         </th>
                         <td class="px-6 py-4">
-                            {{ $rute->rute_awal }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $rute->rute_akhir }}
-                        </td>
-                        <td class="px-6 py-4">
-                            Rp.{{ number_format($rute->harga, 0, ',', '.') }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $rute->type_transportasi->nama_type }} -
-                            {{ $rute->type_transportasi->keterangan }}
+                            {{ $type->keterangan }}
                         </td>
                     </tr>
                 @endforeach
