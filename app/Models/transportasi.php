@@ -24,4 +24,9 @@ class Transportasi extends Model
     {
         return $this->belongsTo(Type_transportasi::class, 'id_type_transportasi');
     }
+
+    public function pemesanan(): HasMany
+    {
+        return $this->hasMany(Pemesanan::class, 'id_pemesanan');
+    }
 }

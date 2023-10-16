@@ -17,8 +17,14 @@ class CheckPenumpang
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('penumpang')->check()) {
+            // Jika pengguna sudah login sebagai penumpang
             return $next($request);
+        } else if (Auth::guard('petugas')->check()) {
+            // Jika pengguna sudah login sebagai petugas
+            return redirect('/#pemesanan')->with('alert', 'Anda bukan penumpang');
+        } else {
+            // Jika pengguna belum login
+            return redirect('/login');
         }
-        return redirect('/')->with('alert', 'Anda bukan penumpang');
     }
 }

@@ -28,4 +28,9 @@ class Pemesanan extends Model
     public function petugas(): BelongsTo {
         return $this->belongsTo(petugas::class, 'id_petugas');
     }
+
+    public function transportasi(): BelongsTo
+    {
+        return $this->belongsTo(Transportasi::class, 'id_transportasi');
+    }
 }

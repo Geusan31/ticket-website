@@ -48,10 +48,48 @@
             <h1 class="text-xl mb-4">Pemesanan Penerbangan</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <div class="mb-4">
-                    <label for="from" class="block mb-2">From</label>
-                    <input id="from" name="from" class="w-full p-2 border border-gray-300 rounded"
-                        value="Jakarta (JKT)">
+                <input id="id_transportasi" type="hidden" name="transportasi">
+                <div>
+                    <label for="rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
+                    <select id="rute" name="rute" value="{{ old('rute') }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6 penumpangField">
+                        <option selected disabled>Rute</option>
+                        @foreach ($rutes as $rute)
+                            <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}</option>
+                        @endforeach
+                    </select>
+                    @error('rute')
+                        <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label for="tanggal_pergi" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
+                            pergi</label>
+                        <input type="date" id="tanggal_pergi" name="tanggal_pergi"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
+                        @error('tanggal_pergi')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="kode_kursi" class="block mb-2 text-sm font-medium text-gray-900">Kode Kursi</label>
+                        <input id="kode_kursi_display"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6"
+                            readonly>
+                        <input id="kode_kursi" type="hidden"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            readonly>
+                        @error('kode_kursi')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
@@ -63,6 +101,7 @@
             <h1 class="text-xl mb-4">Pemesanan Kereta Api</h1>
             <form action="/pemesanan" method="post">
                 @csrf
+                <input type="hidden" name="transportasi" value="keretaApi">
                 <div class="mb-4">
                     <label for="from" class="block mb-2">From</label>
                     <input id="from" name="from" class="w-full p-2 border border-gray-300 rounded"
@@ -73,6 +112,7 @@
             </form>
         </div>
     </div>
+
     <!-- Jumbotron -->
     <section class="max-w-screen-xl mt-8 relative mx-auto px-7">
         <h1 class="mb-4 text-xl font-semibold">Temukan kembali diri Anda di Asia dan sekitarnya</h1>

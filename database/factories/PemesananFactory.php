@@ -25,7 +25,7 @@ class PemesananFactory extends Factory
             'tanggal_pemesanan' => $this->faker->date(),
             'id_pelanggan' => mt_rand(1, 5),
             'kode_kursi' => $this->faker->numberBetween(30, 60),
-            'id_rute' => $rute->id_rute,
+            'id_transportasi' => mt_rand(1, 5),
             'tujuan' => $rute->tujuan,
             'tanggal_berangkat' => $this->faker->date(),
             'jam_cekin' => $this->faker->dateTime(),
