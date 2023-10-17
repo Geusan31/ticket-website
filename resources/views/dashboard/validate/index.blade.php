@@ -55,11 +55,13 @@
                         <td class="px-6 py-4">
                             {{ $pemesanan->tanggal_pemesanan }}
                         </td>
+                        @foreach ($pemesanan->penumpang as $penumpang)
+                            <td class="px-6 py-4">
+                                {{ $penumpang->nama_penumpang }}
+                            </td>
+                        @endforeach
                         <td class="px-6 py-4">
-                            {{ $pemesanan->penumpang[0]->nama_penumpang }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $pemesanan->kode_kursi }}
+                            {{ $pemesanan->transportasi->kode }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->transportasi->type_transportasi->nama_type }}
@@ -82,7 +84,8 @@
                         <td class="px-6 py-4">
                             {{ $pemesanan->petugas->nama_petugas }}
                         </td>
-                        <td class="px-6 py-4 font-semibold capitalize {{ $pemesanan->validate == 'success' ? 'text-green-500' : 'text-gray-400' }}">
+                        <td
+                            class="px-6 py-4 font-semibold capitalize {{ $pemesanan->validate == 'success' ? 'text-green-500' : 'text-gray-400' }}">
                             {{ $pemesanan->validate }}
                         </td>
                         <td class="px-6 py-4 w-[9%]">

@@ -15,6 +15,20 @@
             </div>
         </div>
     @endif
+
+    @if (session()->has('success'))
+        <div class="fixed z-50 shadow-lg right-60 left-60 top-32 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+                <span class="font-medium"> {{ session('success') }}
+            </div>
+        </div>
+    @endif
     <!-- Jumbotron -->
     <div class="relative overflow-hidden bg-cover bg-no-repeat"
         style="background-position: 50%;background-image: url('{{ asset('/assets/img/beach.webp') }}');height: 550px;">
@@ -50,15 +64,15 @@
                 @csrf
                 <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
                 <div>
-                    <label for="rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
-                    <select id="rute" name="rute" value="{{ old('rute') }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6 penumpangField">
+                    <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
+                    <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
                         <option selected disabled>Rute</option>
                         @foreach ($rutes as $rute)
                             <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}</option>
                         @endforeach
                     </select>
-                    @error('rute')
+                    @error('id_rute')
                         <div class="mt-2 text-sm text-red-600 dark:text-red-500">
                             {{ $message }}
                         </div>
@@ -66,11 +80,11 @@
                 </div>
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
-                        <label for="tanggal_pergi" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
+                        <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
                             pergi</label>
-                        <input type="date" id="tanggal_pergi" name="tanggal_pergi"
+                        <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
-                        @error('tanggal_pergi')
+                        @error('tanggal_berangkat')
                             <div class="mt-2 text-sm text-red-600 dark:text-red-500">
                                 {{ $message }}
                             </div>

@@ -15,6 +15,7 @@ class Pemesanan extends Model
     public $timestamps = false;
     protected $primaryKey = 'id_pemesanan';
     protected $table = 'pemesanans';
+    // protected $with = ['penumpangs'];
 
     public function penumpang(): HasMany
     {

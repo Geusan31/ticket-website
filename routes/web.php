@@ -40,7 +40,9 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest:petug
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
 
-// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('cekPetugas');
+Route::post('/pemesanan', [PemesananController::class, 'pesan'])->middleware('cekPenumpang');
+Route::get('/getTransportasi/{id}', [getTransportasiKursi::class, 'getTransportasi']);
+
 Route::group(['middleware' => ['cekPetugas']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::resource('/dashboard/rute', RuteController::class);
@@ -53,6 +55,3 @@ Route::group(['middleware' => ['cekPetugas']], function () {
 
     Route::get('/get-transportasi/{id}', [getTransportasiController::class, 'getTransportasi']);
 });
-
-Route::post('/pemesanan', [PemesananController::class, 'pesan'])->middleware('cekPenumpang');
-Route::get('/getTransportasi/{id}', [getTransportasiKursi::class, 'getTransportasi']);

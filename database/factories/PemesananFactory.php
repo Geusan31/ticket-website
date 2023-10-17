@@ -20,18 +20,30 @@ class PemesananFactory extends Factory
 
         $rute = Rute::factory()->create();
 
+        $city = $this->faker->city();
+
+        static $rutes = [1, 2, 3, 4 ,5];
+
+        if(empty($rutes)) {
+            $rutes = [1, 2, 3, 4, 5];
+        }
+
+        $key = array_rand($rutes);
+        $id = $rutes[$key];
+        unset($rutes[$key]);
+
         return [
             'kode_pemesanan' => $this->faker->unique()->randomNumber(2),
             'tanggal_pemesanan' => $this->faker->date(),
-            'id_pelanggan' => mt_rand(1, 5),
-            'kode_kursi' => $this->faker->numberBetween(30, 60),
-            'id_transportasi' => mt_rand(1, 5),
+            'id_pelanggan' => $id,
+            'kode_kursi' => $id,
+            'id_transportasi' => $id,
             'tujuan' => $rute->tujuan,
             'tanggal_berangkat' => $this->faker->date(),
             'jam_cekin' => $this->faker->dateTime(),
             'jam_berangkat' => $this->faker->dateTime(),
             'total_bayar' => $this->faker->randomNumber(4),
-            'id_petugas' => mt_rand(1, 5),
+            'id_petugas' => $id,
         ];
     }
 }
