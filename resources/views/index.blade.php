@@ -48,7 +48,7 @@
             <h1 class="text-xl mb-4">Pemesanan Penerbangan</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input id="id_transportasi" type="hidden" name="transportasi">
+                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
                 <div>
                     <label for="rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
                     <select id="rute" name="rute" value="{{ old('rute') }}"
@@ -205,13 +205,5 @@
             </div>
         </div>
     </section>
-    <!-- Section: Design Block -->
-    @if (Auth::guard('penumpang')->check())
-        <h1>Anda berhasil login sebagai penumpang</h1>
-    @elseif(Auth::guard('petugas')->check())
-        <h1>Anda berhasil login sebagai petugas</h1>
-    @else
-        <h1>Anda belum login</h1>
-    @endif
     @include('partials.footer')
 @endsection

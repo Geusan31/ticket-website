@@ -17,7 +17,6 @@ class PemesananController extends Controller
         $kodeBaru = str_pad($kodeTerbesar + 1, 3, '0', STR_PAD_LEFT);
         
         $result = $request->validate([
-            'kode_kursi' => "required",
             'id_rute' => "required",
             'tujuan' => 'required',
             'tanggal_berangkat' => 'required',
@@ -29,6 +28,10 @@ class PemesananController extends Controller
         $result['kode_pemesanan'] = $kodeBaru;
         $result['tanggal_pemesanan'] = Carbon::now()->format('Y-m-d');
         $result['id_pelanggan'] = Auth::guard('penumpang')->user()->id_penumpang;
+        $result['id_transportasi'] = $request->id_transportasi;
+        $result['kode_kursi'] = $request->id_transportasi;
+
+        dd($result);
     }
 
     public function update(Request $request, $id)

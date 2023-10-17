@@ -18,7 +18,7 @@
                         Kode Kursi
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Rute
+                        Transportasi
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Tujuan
@@ -62,10 +62,10 @@
                             {{ $pemesanan->kode_kursi }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->rute->rute_awal }}
+                            {{ $pemesanan->transportasi->type_transportasi->nama_type }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->rute->tujuan }}
+                            {{ $pemesanan->tujuan }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->tanggal_berangkat }}
