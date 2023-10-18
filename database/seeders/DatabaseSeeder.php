@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\Level;
+use App\Models\Pembayaran;
 use App\Models\Pemesanan;
 use App\Models\Penumpang;
 use App\Models\Petugas;
@@ -34,6 +35,8 @@ class DatabaseSeeder extends Seeder
 
         Pemesanan::factory(5)->create();
 
+        Pembayaran::factory(5)->create();
+        
         Transportasi::factory(5)->create();
 
         Type_transportasi::factory(5)->create();

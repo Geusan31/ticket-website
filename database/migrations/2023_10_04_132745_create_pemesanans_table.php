@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('id_pelanggan')->references('id_penumpang')->on('penumpangs');
             $table->string('kode_kursi');
             $table->foreignId('id_transportasi');
-            $table->string('tujuan');
+            $table->foreignId('id_rute');
             $table->date('tanggal_berangkat');
             $table->time('jam_cekin');
             $table->time('jam_berangkat');

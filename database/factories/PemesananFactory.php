@@ -38,7 +38,7 @@ class PemesananFactory extends Factory
             'id_pelanggan' => $id,
             'kode_kursi' => $id,
             'id_transportasi' => $id,
-            'tujuan' => $rute->tujuan,
+            'id_rute' => $id,
             'tanggal_berangkat' => $this->faker->date(),
             'jam_cekin' => $this->faker->dateTime(),
             'jam_berangkat' => $this->faker->dateTime(),

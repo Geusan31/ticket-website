@@ -5,6 +5,7 @@ use App\Http\Controllers\getTransportasiController;
 use App\Http\Controllers\getTransportasiKursi;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\RuteController;
@@ -39,6 +40,8 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest:penum
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest:petugas')->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
+
+Route::get('/order', [OrderController::class, 'index'])->middleware('cekPenumpang');
 
 Route::post('/pemesanan', [PemesananController::class, 'pesan'])->middleware('cekPenumpang');
 Route::get('/getTransportasi/{id}', [getTransportasiKursi::class, 'getTransportasi']);

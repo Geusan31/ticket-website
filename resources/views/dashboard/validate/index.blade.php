@@ -67,7 +67,7 @@
                             {{ $pemesanan->transportasi->type_transportasi->nama_type }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->tujuan }}
+                            {{ $pemesanan->rute->tujuan }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->tanggal_berangkat }}

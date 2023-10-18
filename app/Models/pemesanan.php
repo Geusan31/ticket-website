@@ -34,4 +34,9 @@ class Pemesanan extends Model
     {
         return $this->belongsTo(Transportasi::class, 'id_transportasi');
     }
+
+    public function pembayaran()
+    {
+        return $this->belongsTo(Pembayaran::class, 'id_pembayaran');
+    }
 }

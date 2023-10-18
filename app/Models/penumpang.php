@@ -21,4 +21,9 @@ class Penumpang extends Authenticatable
     {
         return $this->belongsTo(Pemesanan::class, 'id_pemesanan');
     }
+
+    public function pembayaran()
+    {
+        return $this->belongsTo(Penumpang::class, 'id_pembayaran');
+    }
 }

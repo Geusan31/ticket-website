@@ -4,7 +4,7 @@
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-600">TravelGant</span>
         </a>
         <div class="flex items-center md:order-2">
-            @if(Auth::guard('penumpang')->check() || Auth::guard('petugas')->check())
+            @if (Auth::guard('penumpang')->check() || Auth::guard('petugas')->check())
                 <div class="flex items-center">
                     <button type="button"
                         class="flex mr-3 text-sm bg-gray-800 rounded-full md:mr-0 focus:ring-4 focus:ring-gray-300"
@@ -12,8 +12,8 @@
                         data-dropdown-placement="bottom">
                         <span class="sr-only">Open user menu</span>
                         <div class="relative w-8 h-8 overflow-hidden bg-gray-200 rounded-full">
-                            <svg class="absolute w-10 h-10 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
+                            <svg class="absolute w-10 h-10 text-gray-400 -left-1" fill="currentColor"
+                                viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
                                     clip-rule="evenodd"></path>
                             </svg>
@@ -43,6 +43,11 @@
                                 <li>
                                     <a href="/dashboard"
                                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+                                </li>
+                            @elseif(Auth::guard('penumpang')->check())
+                                <li>
+                                    <a href="/order"
+                                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">My Order</a>
                                 </li>
                             @endif
                             <li>
@@ -95,8 +100,7 @@
                     </li>
                 </div>
                 <li class="!ml-0">
-                    <a href="#pemesanan" id="keretaApiNav"
-                        class="block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0"
+                    <a href="#pemesanan" id="keretaApiNav" class="block py-2 pl-3 pr-4 rounded md:bg-transparent md:p-0"
                         aria-current="page">Kereta api</a>
                 </li>
             </ul>
