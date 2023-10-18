@@ -2,7 +2,7 @@
 
 @section('container')
     @if (session()->has('alert'))
-        <div class="fixed z-50 shadow-lg right-60 left-60 top-32 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+        <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
             role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
@@ -17,7 +17,7 @@
     @endif
 
     @if (session()->has('success'))
-        <div class="fixed z-50 shadow-lg right-60 left-60 top-32 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+        <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
             <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                 fill="currentColor" viewBox="0 0 20 20">
                 <path

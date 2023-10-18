@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laporan Pemesanan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body>
@@ -26,7 +27,7 @@
                         Kode Kursi
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Rute
+                        Transportasi
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Tujuan
@@ -60,17 +61,19 @@
                         <td class="px-6 py-4">
                             {{ $pemesanan->tanggal_pemesanan }}
                         </td>
+                        @foreach ($pemesanan->penumpang as $penumpang)
+                            <td class="px-6 py-4">
+                                {{ $penumpang->nama_penumpang }}
+                            </td>
+                        @endforeach
                         <td class="px-6 py-4">
-                            {{ $pemesanan->penumpang[0]->nama_penumpang }}
+                            {{ $pemesanan->transportasi->kode }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->kode_kursi }}
+                            {{ $pemesanan->transportasi->type_transportasi->nama_type }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->rute->rute_awal }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $pemesanan->rute->tujuan }}
+                            {{ $pemesanan->tujuan }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->tanggal_berangkat }}

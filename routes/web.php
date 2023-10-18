@@ -44,14 +44,23 @@ Route::post('/pemesanan', [PemesananController::class, 'pesan'])->middleware('ce
 Route::get('/getTransportasi/{id}', [getTransportasiKursi::class, 'getTransportasi']);
 
 Route::group(['middleware' => ['cekPetugas']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::resource('/dashboard/rute', RuteController::class);
-    Route::resource('/dashboard/transportasi', TransportasiController::class);
-    Route::resource('/dashboard/type_transportasi', Type_TransportasiController::class);
-    Route::get('/dashboard/validate', [ValidateController::class, 'index']);
-    Route::put('/dashboard/validate/{id}', [PemesananController::class, 'update']);
-    Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
-    Route::get('/dashboard/laporan_pemesanan', [LaporanController::class, 'print']);
-
-    Route::get('/get-transportasi/{id}', [getTransportasiController::class, 'getTransportasi']);
+    Route::group(['middleware' => ['cekAdmin']], function () {
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::resource('/dashboard/rute', RuteController::class);
+        Route::resource('/dashboard/transportasi', TransportasiController::class);
+        Route::resource('/dashboard/type_transportasi', Type_TransportasiController::class);
+        Route::get('/dashboard/validate', [ValidateController::class, 'index']);
+        Route::put('/dashboard/validate/{id}', [PemesananController::class, 'update']);
+        Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
+        Route::get('/dashboard/laporan_pemesanan', [LaporanController::class, 'print']);
+        Route::get('/get-transportasi/{id}', [getTransportasiController::class, 'getTransportasi']);
+    });
+    
+    Route::group(['middleware' => ['cekPetugasLevel']], function () {
+        Route::get('/dashboard', [DashboardController::class, 'index']);
+        Route::get('/dashboard/validate', [ValidateController::class, 'index']);
+        Route::put('/dashboard/validate/{id}', [PemesananController::class, 'update']);
+        Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
+        Route::get('/dashboard/laporan_pemesanan', [LaporanController::class, 'print']);
+    });
 });

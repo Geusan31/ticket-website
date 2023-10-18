@@ -38,6 +38,6 @@
                 <div class="text-sm font-medium text-gray-400">Orders</div>
             </div>
         </div>
-        <a href="#" class="text-blue-500 font-medium text-sm hover:text-blue-600">View details</a>
+        <a href="/dashboard/validate" class="text-blue-500 font-medium text-sm hover:text-blue-600">View details</a>
     </div>
 </div>
