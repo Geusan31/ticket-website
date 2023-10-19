@@ -62,7 +62,7 @@
             <h1 class="text-xl mb-4">Pemesanan Penerbangan</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input id="id_transportasi" type="text" readonly name="id_transportasi">
+                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
                 <div>
                     <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
                     <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"

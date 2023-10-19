@@ -43,17 +43,18 @@ function fetchTypeTransportasiData(transportasi) {
             }
         })
         .then(data => {
-            console.log(data)
+            // console.log(data)
             let select = document.getElementById("id_rute");
             select.innerHTML = "";
-            data.forEach(function (id_rute) {
+            data.forEach(function (rute) {
+                console.log(rute)
+                let option = document.createElement("option");
+                option.value = rute.id_rute;
+                option.text = rute.rute_awal + " - " + rute.rute_awal;
+                option.setAttribute("selected", "selected");
+                option.selected = true;
+                select.add(option);
             });
-            let option = document.createElement("option");
-            option.value = data.id_rute;
-            option.text = data.rute_awal + " - " + data.rute_awal;
-            option.setAttribute("selected", "selected");
-            option.selected = true;
-            select.add(option);
         })
         .catch(err => {
             console.log(err)

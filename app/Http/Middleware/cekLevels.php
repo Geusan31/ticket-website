@@ -20,7 +20,7 @@ class cekLevels
          if (Auth::guard('petugas')->check()) {
              // Cek apakah level petugas sesuai dengan parameter
              if (Auth::guard('petugas')->user()->id_level == $level) {
-                return response("ANDA LEVEL $level");
+                // return response("ANDA LEVEL $level");
                 // Lanjutkan request ke aplikasi
                 return $next($request);
             }
