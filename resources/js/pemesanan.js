@@ -20,3 +20,42 @@ document.getElementById("id_rute").addEventListener("change", function (e) {
             });
         });
 });
+
+document.getElementById('pesawat').addEventListener('click', (e) => {
+    let transportasi = e.target.value;
+
+    fetchTypeTransportasiData(transportasi);
+})
+
+document.getElementById('keretaApi').addEventListener('click', (e) => {
+    let transportasi = e.target.value;
+
+    fetchTypeTransportasiData(transportasi);
+})
+
+function fetchTypeTransportasiData(transportasi) {
+    fetch(`/getTypeTransportasi/${transportasi}`)
+        .then(response => {
+            if(response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error('Transportasi tidak ditemukan')
+            }
+        })
+        .then(data => {
+            console.log(data)
+            let select = document.getElementById("id_rute");
+            select.innerHTML = "";
+            data.forEach(function (id_rute) {
+            });
+            let option = document.createElement("option");
+            option.value = data.id_rute;
+            option.text = data.rute_awal + " - " + data.rute_awal;
+            option.setAttribute("selected", "selected");
+            option.selected = true;
+            select.add(option);
+        })
+        .catch(err => {
+            console.log(err)
+        })
+}

@@ -14,14 +14,17 @@ class cekLevels
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, string $level): Response
     {
-        // Cek apakah user memiliki level petugas
-        if (Auth::guard('petugas')->user()->id_level == 2) {
-            return $next($request);
+         // Cek apakah petugas sudah login
+         if (Auth::guard('petugas')->check()) {
+             // Cek apakah level petugas sesuai dengan parameter
+             if (Auth::guard('petugas')->user()->id_level == $level) {
+                return response("ANDA LEVEL $level");
+                // Lanjutkan request ke aplikasi
+                return $next($request);
+            }
         }
-
-        // Jika tidak, redirect ke halaman utama
         return redirect('/');
     }
 }

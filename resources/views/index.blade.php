@@ -47,22 +47,22 @@
             </div>
         </div>
     </div>
-    <div class="flex max-w-screen-xl mt-8 relative mx-auto px-7 md:px-16" id="pemesanan">
+    <div class="flex flex-col md:flex-row max-w-screen-xl mt-8 relative mx-auto px-7 md:px-16" id="pemesanan">
         <!-- Navigasi Sisi Kiri -->
-        <div class="w-1/4 bg-blue-500 text-white py-5 px-3 rounded-md">
+        <div class="md:w-1/4 w-full bg-blue-500 text-white py-5 px-3 rounded-md">
             <h1 class="text-xl mb-4">Menu</h1>
-            <ul>
-                <li id="pesawat" class="mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Pesawat</li>
-                <li id="keretaApi" class="mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Kereta Api</li>
+            <ul class="flex flex-col">
+                <button id="pesawat" value="Pesawat" class=" text-left mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Pesawat</button>
+                <button id="keretaApi" value="Kereta Api" class="text-left mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Kereta Api</button>
             </ul>
         </div>
 
         <!-- Formulir Pemesanan Penerbangan -->
-        <div id="formPesawat" class="w-3/4 p-5">
+        <div id="formPesawat" class="md:w-3/4 w-full p-5">
             <h1 class="text-xl mb-4">Pemesanan Penerbangan</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
+                <input id="id_transportasi" type="text" readonly name="id_transportasi">
                 <div>
                     <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
                     <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
@@ -115,14 +115,51 @@
             <h1 class="text-xl mb-4">Pemesanan Kereta Api</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input type="hidden" name="transportasi" value="keretaApi">
-                <div class="mb-4">
-                    <label for="from" class="block mb-2">From</label>
-                    <input id="from" name="from" class="w-full p-2 border border-gray-300 rounded"
-                        value="Jakarta (JKT)">
+                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
+                <div>
+                    <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
+                    <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
+                        <option selected disabled>Rute</option>
+                        @foreach ($rutes as $rute)
+                            <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}</option>
+                        @endforeach
+                    </select>
+                    @error('id_rute')
+                        <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
+                <div class="grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
+                            pergi</label>
+                        <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
+                        @error('tanggal_berangkat')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="kode_kursi" class="block mb-2 text-sm font-medium text-gray-900">Kode Kursi</label>
+                        <input id="kode_kursi_display"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6"
+                            readonly>
+                        <input id="kode_kursi" type="hidden"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            readonly>
+                        @error('kode_kursi')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Kereta Api</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
             </form>
         </div>
     </div>

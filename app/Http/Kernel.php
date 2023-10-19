@@ -64,9 +64,7 @@ class Kernel extends HttpKernel
         'signed' => \App\Http\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'cekPetugas' => \App\Http\Middleware\CheckPetugas::class,
+        'cekLevel' => \App\Http\Middleware\cekLevels::class,
         'cekPenumpang' => \App\Http\Middleware\CheckPenumpang::class,
-        'cekAdmin' => \App\Http\Middleware\cekAdmin::class,
-        'cekPetugasLevel' => \App\Http\Middleware\cekLevels::class,
     ];
 }

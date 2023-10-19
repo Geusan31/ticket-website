@@ -1,6 +1,19 @@
 @extends('layouts.main')
 
 @section('container')
+    @if (session()->has('success'))
+    <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+        <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="currentColor" viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+        <span class="sr-only">Info</span>
+        <div>
+            <span class="font-medium"> {{ session('success') }}
+        </div>
+    </div>
+    @endif
     <div class="bg-gray-100 h-screen py-8">
         <div class="container mx-auto px-4">
             <h1 class="text-2xl font-semibold mb-4">Ticket Cart</h1>
@@ -38,23 +51,26 @@
                     </div>
                 </div>
                 <div class="md:w-1/4">
-                    <div class="bg-white rounded-lg shadow-md p-6">
-                        <h2 class="text-lg font-semibold mb-4">Summary</h2>
-                        <div class="flex justify-between mb-2">
-                            <span>Subtotal</span>
-                            <span>Rp.{{ number_format($subtotal, 0, ',', '.') }}</span>
+                    <form action="/order" method="post">
+                        @csrf
+                        <div class="bg-white rounded-lg shadow-md p-6">
+                            <h2 class="text-lg font-semibold mb-4">Summary</h2>
+                            <div class="flex justify-between mb-2">
+                                <span>Subtotal</span>
+                                <span>Rp.{{ number_format($subtotal, 0, ',', '.') }}</span>
+                            </div>
+                            <div class="flex justify-between mb-2">
+                                <span>Pajak</span>
+                                <span>Rp.{{ number_format($pajak, 0, ',', '.') }}</span>
+                            </div>
+                            <hr class="my-2">
+                            <div class="flex justify-between mb-2">
+                                <span class="font-semibold">Total</span>
+                                <span class="font-semibold">Rp.{{ number_format($total, 0, ',', '.') }}</span>
+                            </div>
+                            <button type="submit" class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
                         </div>
-                        <div class="flex justify-between mb-2">
-                            <span>Pajak</span>
-                            <span>Rp.{{ number_format($pajak, 0, ',', '.') }}</span>
-                        </div>
-                        <hr class="my-2">
-                        <div class="flex justify-between mb-2">
-                            <span class="font-semibold">Total</span>
-                            <span class="font-semibold">Rp.{{ number_format($total, 0, ',', '.') }}</span>
-                        </div>
-                        <button class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Checkout</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
