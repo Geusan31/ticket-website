@@ -6,13 +6,80 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Laporan Pemesanan</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    {{-- <link rel="stylesheet" href="./laporan.css"> --}}
+    <style>
+        .container {
+            position: relative;
+            overflow-x: auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border-radius: 0.5rem;
+        }
+
+        .tabel {
+            width: 100%;
+            font-size: 0.875rem;
+            text-align: left;
+            color: #6b7280;
+        }
+
+        .thead {
+            font-size: 0.75rem;
+            color: #374151;
+            text-transform: uppercase;
+            background-color: #f9fafb;
+        }
+
+        th {
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+        }
+
+        tr {
+            background-color: #ffffff;
+            border-bottom-width: 1px;
+        }
+
+        .th_awal {
+            font-weight: 500;
+            color: #111827;
+            white-space: nowrap;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        td {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        .validate {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            font-weight: 600;
+            text-transform: capitalize;
+            color: #10b981;
+        }
+
+        h1 {
+            margin: 20px 0;
+            text-align: center
+        }
+    </style>
 </head>
 
 <body>
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
-        <table class="w-full text-sm text-left text-gray-500">
-            <thead class="text-xs text-gray-700 uppercase bg-gray-50">
+    <div class="container">
+        <h1>Laporan Pesanan Berhasil</h1>
+        <table class="tabel">
+            <thead class="thead text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>
                     <th scope="col" class="px-6 py-3">
                         Kode Pemesanan
@@ -54,44 +121,41 @@
             </thead>
             <tbody>
                 @foreach ($pemesanans as $pemesanan)
-                    <tr class="bg-white border-b">
-                        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                    <tr>
+                        <th scope="row" class="th_awal">
                             {{ $pemesanan->kode_pemesanan }}
                         </th>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->tanggal_pemesanan }}
                         </td>
-                        @foreach ($pemesanan->penumpang as $penumpang)
-                            <td class="px-6 py-4">
-                                {{ $penumpang->nama_penumpang }}
-                            </td>
-                        @endforeach
-                        <td class="px-6 py-4">
+                        <td>
+                            {{ $pemesanan->penumpang->nama_penumpang }}
+                        </td>
+                        <td>
                             {{ $pemesanan->transportasi->kode }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->transportasi->type_transportasi->nama_type }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->rute->tujuan }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->tanggal_berangkat }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->jam_cekin }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->jam_berangkat }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->total_bayar }}
                         </td>
-                        <td class="px-6 py-4">
+                        <td>
                             {{ $pemesanan->petugas->nama_petugas }}
                         </td>
-                        <td
-                            class="px-6 py-4 font-semibold capitalize {{ $pemesanan->validate == 'success' ? 'text-green-500' : 'text-gray-400' }}">
+                        <td class="validate">
                             {{ $pemesanan->validate }}
                         </td>
                     </tr>

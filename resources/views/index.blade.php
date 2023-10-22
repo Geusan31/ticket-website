@@ -15,20 +15,7 @@
             </div>
         </div>
     @endif
-
-    @if (session()->has('success'))
-        <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" viewBox="0 0 20 20">
-                <path
-                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-            </svg>
-            <span class="sr-only">Info</span>
-            <div>
-                <span class="font-medium"> {{ session('success') }}
-            </div>
-        </div>
-    @endif
+    
     <!-- Jumbotron -->
     <div class="relative overflow-hidden bg-cover bg-no-repeat"
         style="background-position: 50%;background-image: url('{{ asset('/assets/img/beach.webp') }}');height: 550px;">
@@ -52,8 +39,10 @@
         <div class="md:w-1/4 w-full bg-blue-500 text-white py-5 px-3 rounded-md">
             <h1 class="text-xl mb-4">Menu</h1>
             <ul class="flex flex-col">
-                <button id="pesawat" value="Pesawat" class=" text-left mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Pesawat</button>
-                <button id="keretaApi" value="Kereta Api" class="text-left mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Kereta Api</button>
+                <button id="pesawat" value="Pesawat"
+                    class=" text-left mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Pesawat</button>
+                <button id="keretaApi" value="Kereta Api"
+                    class="text-left mb-2 cursor-pointer hover:bg-blue-600 px-3 py-2 rounded-md">Kereta Api</button>
             </ul>
         </div>
 
@@ -63,22 +52,59 @@
             <form action="/pemesanan" method="post">
                 @csrf
                 <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
-                <div>
-                    <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
-                    <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
-                        <option selected disabled>Rute</option>
-                        @foreach ($rutes as $rute)
-                            <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}</option>
-                        @endforeach
-                    </select>
-                    @error('id_rute')
-                        <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
                 <div class="grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
+                        {{-- <div class="relative">
+                            <input id="searchAwal" type="text" class="border p-2 w-full"
+                                placeholder="Select an option..." autocomplete="false">
+                            <div id="dropdown_awal" class="hidden absolute border p-2 w-full bg-white z-10">
+                            </div>
+                        </div> --}}
+                        <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
+                            <option selected disabled>Rute</option>
+                            @foreach ($rutes as $rute)
+                                <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('searchAwal')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Qty</label>
+                        {{-- <div class="relative">
+                            <input id="searchAwal" type="text" class="border p-2 w-full"
+                                placeholder="Select an option..." autocomplete="false">
+                            <div id="dropdown_awal" class="hidden absolute border p-2 w-full bg-white z-10">
+                            </div>
+                        </div> --}}
+                        <input type="number" name="qty" id="qty" value="{{ old('qty') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        @error('qty')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    {{-- <div> --}}
+                    {{-- <label for="searchAkhir" class="block mb-2 text-sm font-medium text-gray-900">Rute Akhir</label>
+                        <div class="relative">
+                            <input id="searchAkhir" type="text" class="border p-2 w-full"
+                                placeholder="Select an option...">
+                            <div id="dropdown_akhir" class="hidden absolute border p-2 w-full bg-white z-10">
+                            </div>
+                        </div> --}}
+                    {{-- @error('searchAkhir')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror --}}
+                    {{-- </div> --}}
                     <div>
                         <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
                             pergi</label>
@@ -111,27 +137,38 @@
         </div>
 
         <!-- Formulir Pemesanan Penerbangan -->
-        <div id="formKeretaApi" class="w-3/4 p-5 hidden">
+        <div id="formKeretaApi" class="md:w-3/4 w-full p-5 hidden">
             <h1 class="text-xl mb-4">Pemesanan Kereta Api</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
-                <div>
-                    <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
-                    <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
-                        <option selected disabled>Rute</option>
-                        @foreach ($rutes as $rute)
-                            <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}</option>
-                        @endforeach
-                    </select>
-                    @error('id_rute')
-                        <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+                <input id="id_transportasi_kereta" type="hidden" readonly name="id_transportasi">
                 <div class="grid gap-4 md:grid-cols-2">
+                    <div>
+                        <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
+                        <select id="id_rute_kereta" name="id_rute" value="{{ old('id_rute') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
+                            <option selected disabled>Rute</option>
+                            @foreach ($rutes as $rute)
+                                <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('id_rute')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div>
+                        <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Qty</label>
+                        <input type="number" name="qty" id="qty" value="{{ old('qty') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                        @error('qty')
+                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
                     <div>
                         <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
                             pergi</label>
@@ -145,10 +182,10 @@
                     </div>
                     <div>
                         <label for="kode_kursi" class="block mb-2 text-sm font-medium text-gray-900">Kode Kursi</label>
-                        <input id="kode_kursi_display"
+                        <input id="kode_kursi_display_kereta"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6"
                             readonly>
-                        <input id="kode_kursi" type="hidden"
+                        <input id="kode_kursi_kereta" type="hidden"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                             readonly>
                         @error('kode_kursi')
@@ -159,7 +196,7 @@
                     </div>
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
+                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Kereta Api</button>
             </form>
         </div>
     </div>

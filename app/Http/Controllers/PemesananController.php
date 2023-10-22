@@ -17,8 +17,10 @@ class PemesananController extends Controller
     {
         $result = $request->validate([
             'id_rute' => "required",
+            'qty' => 'required',
             'tanggal_berangkat' => 'required',
         ]);
+
 
         $id_rute = Rute::find($result['id_rute']);
         $kodeTerbesar = Pemesanan::max('kode_pemesanan');
@@ -37,16 +39,44 @@ class PemesananController extends Controller
 
         $result['kode_pemesanan'] = $kodeBaru;
         $result['tanggal_pemesanan'] = Carbon::now()->format('Y-m-d');
-        $result['id_pelanggan'] = Auth::guard('penumpang')->user()->id_penumpang;
+        $result['harga'] = $result['qty'] * $id_rute->harga;
+        $result['id_penumpang'] = Auth::guard('penumpang')->user()->id_penumpang;
         $result['id_transportasi'] = $request->id_transportasi;
         $result['kode_kursi'] = $request->id_transportasi;
         $result['total_bayar'] = $totalBayar;
         $result['tujuan'] = $tujuan;
         $result['id_petugas'] = $randomPetugasId;
 
-        pemesanan::create($result);
+        $pemesanan = pemesanan::create($result);
+        // dd($pemesanan->penumpang->nama_penumpang);
 
-        return redirect('/')->with('success', 'Pesanan telah dibuat');
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('midtrans.server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+
+        $params = array(
+            'transaction_details' => array(
+                'order_id' => $pemesanan->id_pemesanan,
+                'gross_amount' => $pemesanan->harga,
+            ),
+            'customer_details' => array(
+                'nama_penumpang' => $pemesanan->penumpang->nama_penumpang,
+                'username' => $pemesanan->penumpang->username,
+                'alamat_penumpang' => $pemesanan->penumpang->alamat_penumpang,
+                'tanggal_lahir' => $pemesanan->penumpang->tanggal_lahir,
+                'jenis_kelamin' => $pemesanan->penumpang->jenis_kelamin,
+            ),
+        );
+
+        $snapToken = \Midtrans\Snap::getSnapToken($params);
+
+        session()->put('snapToken', $snapToken);
+        return redirect('/order')->with('pesanan', 'Pesanan telah dibuat');
     }
 
     public function update(Request $request, $id)

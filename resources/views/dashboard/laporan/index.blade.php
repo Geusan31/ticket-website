@@ -56,11 +56,9 @@
                         <td class="px-6 py-4">
                             {{ $pemesanan->tanggal_pemesanan }}
                         </td>
-                        @foreach ($pemesanan->penumpang as $penumpang)
-                            <td class="px-6 py-4">
-                                {{ $penumpang->nama_penumpang }}
-                            </td>
-                        @endforeach
+                        <td class="px-6 py-4">
+                            {{ $pemesanan->penumpang->nama_penumpang }}
+                        </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->transportasi->kode }}
                         </td>

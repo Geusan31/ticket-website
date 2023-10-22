@@ -10,10 +10,10 @@ class OrderController extends Controller
 {
     public function index() {
         $id_penumpang = Auth::guard('penumpang')->user()->id_penumpang;
-        $orders = Pemesanan::where('id_pelanggan', $id_penumpang)->get();
+        $orders = Pemesanan::where('id_penumpang', $id_penumpang)->get();
 
         $subtotal = $orders->sum(function ($order) {
-            return $order->rute->harga;
+            return $order->harga;
         });
 
         $pajak = 1000;

@@ -17,9 +17,9 @@ class Pemesanan extends Model
     protected $table = 'pemesanans';
     // protected $with = ['penumpangs'];
 
-    public function penumpang(): HasMany
+    public function penumpang(): BelongsTo
     {
-        return $this->hasMany(penumpang::class, 'id_penumpang');
+        return $this->belongsTo(penumpang::class, 'id_penumpang');
     }
 
     public function rute(): BelongsTo {

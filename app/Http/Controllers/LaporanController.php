@@ -11,7 +11,7 @@ class LaporanController extends Controller
 {
     public function index() {
         return view('dashboard.laporan.index', [
-            'title' => 'Validate',
+            'title' => 'Laporan',
             'pemesanans' => Pemesanan::where('validate', 'success')->get(),
         ]);
     }

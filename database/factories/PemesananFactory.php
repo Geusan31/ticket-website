@@ -35,7 +35,9 @@ class PemesananFactory extends Factory
         return [
             'kode_pemesanan' => $this->faker->unique()->randomNumber(2),
             'tanggal_pemesanan' => $this->faker->date(),
-            'id_pelanggan' => $id,
+            'qty' => mt_rand(1, 10),
+            'harga' => $this->faker->randomNumber(6),
+            'id_penumpang' => $id,
             'kode_kursi' => $id,
             'id_transportasi' => $id,
             'id_rute' => $id,

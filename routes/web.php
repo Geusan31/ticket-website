@@ -35,7 +35,7 @@ Route::get('/', function () {
         'title' => 'Home',
         'transportasi' => Transportasi::all(),
         'rutes' => Rute::all(),
-        'rutePesawat' => Rute::where('id_type_transportasi')
+        // 'rutePesawat' => Rute::where('id_type_transportasi')
     ]);
 });
 
@@ -47,14 +47,6 @@ Route::get('/login', [LoginController::class, 'index'])->middleware('guest:penum
 Route::get('/login', [LoginController::class, 'index'])->middleware('guest:petugas')->name('login');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
-
-Route::group(['middleware' => ['cekLevel:2']], function () {
-    Route::get('/dashboard', [DashboardController::class, 'index']);
-    Route::get('/dashboard/validate', [ValidateController::class, 'index']);
-    Route::put('/dashboard/validate/{id}', [PemesananController::class, 'update']);
-    Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
-    Route::get('/dashboard/laporan_pemesanan', [LaporanController::class, 'print']);
-});
 
 Route::group(['middleware' => ['cekLevel:1']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index']);
@@ -69,6 +61,14 @@ Route::group(['middleware' => ['cekLevel:1']], function () {
 });
 
 
+Route::group(['middleware' => ['cekLevel:2']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/dashboard/validate', [ValidateController::class, 'index']);
+    Route::put('/dashboard/validate/{id}', [PemesananController::class, 'update']);
+    Route::get('/dashboard/laporan', [LaporanController::class, 'index']);
+    Route::get('/dashboard/laporan_pemesanan', [LaporanController::class, 'print']);
+});
+
 Route::get('/order', [OrderController::class, 'index'])->middleware('cekPenumpang');
 Route::post('/order', [PembayaranController::class, 'index']);
 
@@ -76,4 +76,4 @@ Route::post('/pemesanan', [PemesananController::class, 'pesan'])->middleware('ce
 
 
 Route::get('/getTransportasi/{id}', [getTransportasiKursi::class, 'getTransportasi']);
-Route::get('/getTypeTransportasi/{transportasi}', [getTypeTransportasi::class, 'getTypeTransportasi']);
+Route::get('/getRuteByTypeTransportasi/{transportasi}', [getTypeTransportasi::class, 'getTypeTransportasi']);

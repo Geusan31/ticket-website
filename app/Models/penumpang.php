@@ -17,9 +17,9 @@ class Penumpang extends Authenticatable
     protected $table = 'penumpangs';
     protected $primaryKey = 'id_penumpang';
 
-    public function pemesanan(): BelongsTo
+    public function pemesanan(): HasMany
     {
-        return $this->belongsTo(Pemesanan::class, 'id_pemesanan');
+        return $this->hasMany(Pemesanan::class, 'id_pemesanan');
     }
 
     public function pembayaran()
