@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="md:w-1/4">
-                    {{-- <form action="" method="post">
+                    {{-- <form action="https://app.sandbox.midtrans.com/snap/v1/transactions" method="post">
                         @csrf
                     </form> --}}
                     <div class="bg-white rounded-lg shadow-md p-6">
@@ -91,14 +91,16 @@
                             <span class="font-semibold">Total</span>
                             <span class="font-semibold">Rp.{{ number_format($total, 0, ',', '.') }}</span>
                         </div>
-                        <button id="pay-button" data-name="{{ session('snapToken') }}"
-                            class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Bayar
-                            Sekarang</button>
+                        <button data-modal-target="defaultModal" data-modal-toggle="defaultModal" id="pay-button" data-name="{{ session('snapToken') }}"
+                        class="bg-blue-500 text-white py-2 px-4 rounded-lg mt-4 w-full">Bayar
+                        Sekarang</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- @TODO: You can add the desired ID as a reference for the embedId parameter. -->
-    <div id="snap-container"></div>
+    <div id="defaultModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-hidden md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <!-- @TODO: You can add the desired ID as a reference for the embedId parameter. -->
+        <div id="snap-container" class="relative w-full max-w-2xl max-h-full"></div>
+    </div>
 @endsection

@@ -5,3 +5,7 @@
 .ticket.scrolled {
   @apply md:flex;
 }
+
+[modal-backdrop] {
+  background-color: rgba(0, 6, 20, .5);
+}
