@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id('id_pemesanan');
             $table->integer('kode_pemesanan')->unique();
             $table->date('tanggal_pemesanan');
-            $table->integer('qty');
-            $table->integer('harga');
+            // $table->integer('qty');
+            // $table->integer('harga');
             $table->foreignId('id_penumpang')->references('id_penumpang')->on('penumpangs');
             $table->string('kode_kursi');
             $table->foreignId('id_transportasi');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->date('tanggal_berangkat');
             $table->time('jam_cekin');
             $table->time('jam_berangkat');
-            $table->integer('total_bayar');
+            // $table->integer('total_bayar');
             $table->enum('validate', ['pending', 'success'])->default('pending');
             $table->foreignId('id_petugas')->references('id_petugas')->on('petugas');
         });

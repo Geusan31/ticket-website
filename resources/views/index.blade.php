@@ -15,7 +15,72 @@
             </div>
         </div>
     @endif
-    
+
+    @if (session()->has('not_found'))
+        <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 mr-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor" viewBox="0 0 20 20">
+                <path
+                    d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Authorization</span>
+            <div>
+                <span class="font-medium">{{ session('not_found') }}</span>
+            </div>
+        </div>
+    @endif
+
+    @if (session()->has('success'))
+        <div
+            class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+            <div class="relative w-full max-w-2xl max-h-full">
+                <!-- Modal content -->
+                <div class="relative bg-white rounded-lg shadow">
+                    <!-- Modal header -->
+                    <div class="flex items-start justify-between p-4 border-b rounded-t">
+                        <h3 class="text-xl font-semibold text-gray-900">
+                            Detail Pemesanan
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
+                            data-modal-hide="staticModal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <div class="p-6 space-y-6">
+                        <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow ">
+                            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 ">Detail
+                                Pemesanan</h5>
+                            <p class="mb-3 font-normal text-gray-700 ">
+                                Rute Awal: {{ session('rute_awal') }}<br>
+                                Rute Akhir: {{ session('rute_akhir') }}<br>
+                                Jumlah Kursi: {{ session('jumlah_kursi') }}<br>
+                                Tujuan: {{ session('tujuan') }}<br>
+                                Tipe Transportasi: {{ session('nama_type') }}
+                            </p>
+                            <a href="#"
+                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+                                Read more
+                                <svg class="w-3.5 h-3.5 ml-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                    fill="none" viewBox="0 0 14 10">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Jumbotron -->
     <div class="relative overflow-hidden bg-cover bg-no-repeat"
         style="background-position: 50%;background-image: url('{{ asset('/assets/img/beach.webp') }}');height: 550px;">
@@ -51,85 +116,51 @@
             <h1 class="text-xl mb-4">Pemesanan Penerbangan</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
+                <input id="id_transportasi" type="text" readonly name="id_transportasi">
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
-                        <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
-                        {{-- <div class="relative">
-                            <input id="searchAwal" type="text" class="border p-2 w-full"
-                                placeholder="Select an option..." autocomplete="false">
-                            <div id="dropdown_awal" class="hidden absolute border p-2 w-full bg-white z-10">
-                            </div>
-                        </div> --}}
-                        <select id="id_rute" name="id_rute" value="{{ old('id_rute') }}"
+                        <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Rute
+                            Awal</label>
+                        <select id="id_rute" name="rute_awal" value="{{ old('rute_awal') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
-                            <option selected disabled>Rute</option>
+                            <option selected disabled>-- Rute Awal --</option>
                             @foreach ($rutes as $rute)
-                                <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}
-                                </option>
+                                <option value="{{ $rute->rute_awal }}">{{ $rute->rute_awal }}</option>
                             @endforeach
                         </select>
-                        @error('searchAwal')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                        @error('rute_awal')
+                            <div class="mt-2 text-sm text-red-600">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div>
-                        <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Qty</label>
-                        {{-- <div class="relative">
-                            <input id="searchAwal" type="text" class="border p-2 w-full"
-                                placeholder="Select an option..." autocomplete="false">
-                            <div id="dropdown_awal" class="hidden absolute border p-2 w-full bg-white z-10">
-                            </div>
-                        </div> --}}
-                        <input type="number" name="qty" id="qty" value="{{ old('qty') }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        @error('qty')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                        <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Rute
+                            Akhir</label>
+                        <select id="id_rute" name="rute_akhir" value="{{ old('rute_akhir') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
+                            <option selected disabled>-- Rute Akhir --</option>
+                            @foreach ($rutes as $rute)
+                                <option value="{{ $rute->rute_akhir }}">{{ $rute->rute_akhir }}</option>
+                            @endforeach
+                        </select>
+                        @error('rute_akhir')
+                            <div class="mt-2 text-sm text-red-600">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
-                    {{-- <div> --}}
-                    {{-- <label for="searchAkhir" class="block mb-2 text-sm font-medium text-gray-900">Rute Akhir</label>
-                        <div class="relative">
-                            <input id="searchAkhir" type="text" class="border p-2 w-full"
-                                placeholder="Select an option...">
-                            <div id="dropdown_akhir" class="hidden absolute border p-2 w-full bg-white z-10">
-                            </div>
-                        </div> --}}
-                    {{-- @error('searchAkhir')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {{ $message }}
-                            </div>
-                        @enderror --}}
-                    {{-- </div> --}}
-                    <div>
-                        <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
-                            pergi</label>
-                        <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
-                        @error('tanggal_berangkat')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="kode_kursi" class="block mb-2 text-sm font-medium text-gray-900">Kode Kursi</label>
-                        <input id="kode_kursi_display"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6"
-                            readonly>
-                        <input id="kode_kursi" type="hidden"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            readonly>
-                        @error('kode_kursi')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
+                </div>
+                <div class=" my-6">
+                    <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
+                        pergi</label>
+                    <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
+                    @error('tanggal_berangkat')
+                        <div class="mt-2 text-sm text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
                 <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
@@ -144,59 +175,52 @@
                 <input id="id_transportasi_kereta" type="hidden" readonly name="id_transportasi">
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
-                        <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Rute</label>
-                        <select id="id_rute_kereta" name="id_rute" value="{{ old('id_rute') }}"
+                        <label for="searchAwal_kereta" class="block mb-2 text-sm font-medium text-gray-900">Rute
+                            Awal</label>
+                        <select id="id_rute" name="rute_awal" value="{{ old('rute_awal') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
-                            <option selected disabled>Rute</option>
+                            <option selected disabled>-- Rute Awal --</option>
                             @foreach ($rutes as $rute)
-                                <option value="{{ $rute->id_rute }}">{{ $rute->rute_awal }} - {{ $rute->rute_akhir }}
-                                </option>
+                                <option value="{{ $rute->rute_awal }}">{{ $rute->rute_awal }}</option>
                             @endforeach
                         </select>
-                        @error('id_rute')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                        @error('rute_awal')
+                            <div class="mt-2 text-sm text-red-600">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div>
-                        <label for="id_rute" class="block mb-2 text-sm font-medium text-gray-900">Qty</label>
-                        <input type="number" name="qty" id="qty" value="{{ old('qty') }}"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        @error('qty')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
-                            pergi</label>
-                        <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
-                        @error('tanggal_berangkat')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div>
-                        <label for="kode_kursi" class="block mb-2 text-sm font-medium text-gray-900">Kode Kursi</label>
-                        <input id="kode_kursi_display_kereta"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-6"
-                            readonly>
-                        <input id="kode_kursi_kereta" type="hidden"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                            readonly>
-                        @error('kode_kursi')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
+                        <label for="searchAkhir_kereta" class="block mb-2 text-sm font-medium text-gray-900">Rute
+                            Akhir</label>
+                        <select id="id_rute" name="rute_akhir" value="{{ old('rute_akhir') }}"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
+                            <option selected disabled>-- Rute Akhir --</option>
+                            @foreach ($rutes as $rute)
+                                <option value="{{ $rute->rute_akhir }}">{{ $rute->rute_akhir }}</option>
+                            @endforeach
+                        </select>
+                        @error('rute_akhir')
+                            <div class="mt-2 text-sm text-red-600">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                 </div>
+                <div class=" my-6">
+                    <label for="tanggal_berangkat" class="block mb-2 text-sm font-medium text-gray-900">Tanggal
+                        pergi</label>
+                    <input type="date" id="tanggal_berangkat" name="tanggal_berangkat"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 penumpangField">
+                    @error('tanggal_berangkat')
+                        <div class="mt-2 text-sm text-red-600">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Kereta Api</button>
+                <button type="submit" data-modal-target="staticModal" data-modal-toggle="staticModal"
+                    class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Kereta Api</button>
             </form>
         </div>
     </div>

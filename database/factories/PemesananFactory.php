@@ -35,8 +35,8 @@ class PemesananFactory extends Factory
         return [
             'kode_pemesanan' => $this->faker->unique()->randomNumber(2),
             'tanggal_pemesanan' => $this->faker->date(),
-            'qty' => mt_rand(1, 10),
-            'harga' => $this->faker->randomNumber(6),
+            // 'qty' => mt_rand(1, 10),
+            // 'harga' => $this->faker->randomNumber(6),
             'id_penumpang' => $id,
             'kode_kursi' => $id,
             'id_transportasi' => $id,
@@ -44,7 +44,7 @@ class PemesananFactory extends Factory
             'tanggal_berangkat' => $this->faker->date(),
             'jam_cekin' => $this->faker->dateTime(),
             'jam_berangkat' => $this->faker->dateTime(),
-            'total_bayar' => $this->faker->randomNumber(4),
+            // 'total_bayar' => $this->faker->randomNumber(4),
             'id_petugas' => $id,
         ];
     }
