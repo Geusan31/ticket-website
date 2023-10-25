@@ -24,14 +24,17 @@ class PemesananController extends Controller
             'tanggal_berangkat' => 'required',
         ]);
 
+        $types = type_transportasi::where('nama_type', $request->id_type_transportasi)->get();
+
 
         $rute = Rute::where('rute_awal', $result['rute_awal'])
             ->where('rute_akhir', $result['rute_akhir'])
+            ->whereIn('id_type_transportasi', $types->pluck('id_type_transportasi'))
             ->first();
 
         // $type_transportasi = Type_transportasi::where('id_type_transportasi', $rute->id_type_transportasi)->first();
 
-        if ($rute == null) {
+        if (!$rute) {
             return redirect('/')->with(
                 'not_found',
                 'Rute tidak ditemukan',
@@ -101,6 +104,21 @@ class PemesananController extends Controller
     }
 
     public function pesanStore(Request $request) {
+        $request->session()->forget([
+            'success',
+            'kode_pemesanan',
+            'tanggal_pemesanan',
+            'id_penumpang',
+            'id_transportasi',
+            'jam_berangkat',
+            'jam_cekin',
+            'rute_awal',
+            'rute_akhir',
+            'jumlah_kursi',
+            'id_petugas',
+            'tujuan',
+            'nama_type',
+        ]);
         $pemesanan = pemesanan::create($request->all());
 
         $id_penumpang = Auth::guard('penumpang')->user()->id_penumpang;

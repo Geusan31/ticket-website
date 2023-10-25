@@ -55,8 +55,8 @@
                                                 <img class="h-16 w-16 mr-4" src="https://via.placeholder.com/150"
                                                     alt="Product image">
                                                 <span class="font-semibold">Ticket
-                                                    {{ $order->transportasi->type_transportasi->nama_type }} -
-                                                    {{ $order->transportasi->type_transportasi->keterangan }}</span>
+                                                    {{ $order->rute->type_transportasi->nama_type }} -
+                                                    {{ $order->rute->type_transportasi->keterangan }}</span>
                                             </div>
                                         </td>
                                         <td class="py-4">{{ $order->rute->tujuan }}</td>

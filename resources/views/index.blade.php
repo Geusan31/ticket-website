@@ -146,7 +146,8 @@
             <h1 class="text-xl mb-4">Pemesanan Penerbangan</h1>
             <form action="/pemesanan" method="post">
                 @csrf
-                <input id="id_transportasi" type="text" readonly name="id_transportasi">
+                <input id="id_transportasi" type="hidden" readonly name="id_transportasi">
+                <input id="id_type_transportasi" type="hidden" readonly value="Pesawat" name="id_type_transportasi">
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
                         <label for="searchAwal" class="block mb-2 text-sm font-medium text-gray-900">Rute
@@ -205,11 +206,12 @@
             <form action="/pemesanan" method="post">
                 @csrf
                 <input id="id_transportasi_kereta" type="hidden" readonly name="id_transportasi">
+                <input id="id_type_transportasi_kereta" type="hidden" readonly value="Kereta" name="id_type_transportasi">
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
                         <label for="searchAwal_kereta" class="block mb-2 text-sm font-medium text-gray-900">Rute
                             Awal</label>
-                        <select id="id_rute" name="rute_awal" value="{{ old('rute_awal') }}"
+                        <select id="searchAwal_kereta" name="rute_awal" value="{{ old('rute_awal') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
                             <option selected disabled>-- Rute Awal --</option>
                             @foreach ($rutes as $rute)
@@ -225,7 +227,7 @@
                     <div>
                         <label for="searchAkhir_kereta" class="block mb-2 text-sm font-medium text-gray-900">Rute
                             Akhir</label>
-                        <select id="id_rute" name="rute_akhir" value="{{ old('rute_akhir') }}"
+                        <select id="searchAkhir_kereta" name="rute_akhir" value="{{ old('rute_akhir') }}"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 penumpangField">
                             <option selected disabled>-- Rute Akhir --</option>
                             @foreach ($rutes as $rute)
@@ -251,7 +253,7 @@
                     @enderror
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit" data-modal-target="staticModal" data-modal-toggle="staticModal"
+                <button type="submit" data-session="{{ session('success') }}" data-kode_pemesanan="{{ session('kode_pemesanan') }}" data-id_rute="{{ session('id_rute') }}" data-tanggal_pemesanan="{{ session('tanggal_pemesanan') }}" data-id_penumpang="{{ session('id_penumpang') }}" data-id_transportasi="{{ session('id_transportasi') }}" data-jam_berangkat="{{ session('jam_berangkat') }}" data-jam_cekin="{{ session('jam_cekin') }}" data-id_petugas="{{ session('id_petugas') }}" data-tanggal_berangkat="{{ session('tanggal_berangkat') }}"
                     class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Kereta Api</button>
             </form>
         </div>

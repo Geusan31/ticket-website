@@ -15,17 +15,23 @@
 // Dapatkan elemen select untuk rute_awal dan rute_akhir
 let selectRuteAwal = document.querySelector('#id_rute[name="rute_awal"]');
 let selectRuteAkhir = document.querySelector('#id_rute[name="rute_akhir"]');
+// Kerta
+let selectRuteAwalKereta = document.getElementById('searchAwal_kereta');
+let selectRuteAkhirKereta = document.getElementById('searchAkhir_kereta');
 
 // Tambahkan event listener untuk event change
 selectRuteAwal.addEventListener("change", fetchTransportasiType);
 selectRuteAkhir.addEventListener("change", fetchTransportasiType);
+
+// Kereta
+selectRuteAwalKereta.addEventListener("change", fetchTransportasiTypeKereta);
+selectRuteAkhirKereta.addEventListener("change", fetchTransportasiTypeKereta);
 
 function fetchTransportasiType() {
     // Dapatkan nilai yang dipilih pengguna
     let ruteAwal = selectRuteAwal.options[selectRuteAwal.selectedIndex].value;
     let ruteAkhir =
         selectRuteAkhir.options[selectRuteAkhir.selectedIndex].value;
-
     // Kirim permintaan ke server dengan Fetch API
     fetch(`/getTransportasiType/${ruteAwal}/${ruteAkhir}`)
         .then((response) => response.json())
@@ -33,6 +39,24 @@ function fetchTransportasiType() {
             // Dapatkan id_type_transportasi dari data yang dikembalikan server
             let id_type_transportasi = data.id_type_transportasi;
             document.getElementById("id_transportasi").value =
+                id_type_transportasi;
+            // Lakukan sesuatu dengan id_type_transportasi...
+        })
+        .catch((error) => console.error("Error:", error));
+}
+
+function fetchTransportasiTypeKereta() {
+    // Dapatkan nilai yang dipilih pengguna
+    let ruteAwal = selectRuteAwalKereta.options[selectRuteAwalKereta.selectedIndex].value;
+    let ruteAkhir =
+        selectRuteAkhirKereta.options[selectRuteAkhirKereta.selectedIndex].value;
+
+    // Kirim permintaan ke server dengan Fetch API
+    fetch(`/getTransportasiType/${ruteAwal}/${ruteAkhir}`)
+        .then((response) => response.json())
+        .then((data) => {
+            let id_type_transportasi = data.id_type_transportasi;
+            document.getElementById("id_transportasi_kereta").value =
                 id_type_transportasi;
 
             // Lakukan sesuatu dengan id_type_transportasi...
@@ -176,251 +200,216 @@ kursiButtons.forEach((button) => {
 //             });
 //     });
 
-// Pesawat
-let dropdownAwal = document.getElementById("dropdown_awal");
-let dropdownAkhir = document.getElementById("dropdown_akhir");
-let optionsAwal = dropdownAwal.getElementsByClassName("optionAwal");
-let optionsAkhir = dropdownAkhir.getElementsByClassName("optionAkhir");
-let searchAwal = document.getElementById("searchAwal");
-let searchAkhir = document.getElementById("searchAkhir");
+// // Pesawat
+// let dropdownAwal = document.getElementById("dropdown_awal");
+// let dropdownAkhir = document.getElementById("dropdown_akhir");
+// let optionsAwal = dropdownAwal.getElementsByClassName("optionAwal");
+// let optionsAkhir = dropdownAkhir.getElementsByClassName("optionAkhir");
+// let searchAwal = document.getElementById("searchAwal");
+// let searchAkhir = document.getElementById("searchAkhir");
 
-// Kereta Api
-let dropdownAwalKereta = document.getElementById("dropdown_awal_kereta");
-let dropdownAkhirKereta = document.getElementById("dropdown_akhir_kereta");
-let optionsAwalKereta =
-    dropdownAwal.getElementsByClassName("optionAwal_kereta");
-let optionsAkhirKereta =
-    dropdownAkhir.getElementsByClassName("optionAkhir_kereta");
-let searchAwalKereta = document.getElementById("searchAwal_kereta");
-let searchAkhirKereta = document.getElementById("searchAkhir_kereta");
+// // Kereta Api
+// let dropdownAwalKereta = document.getElementById("dropdown_awal_kereta");
+// let dropdownAkhirKereta = document.getElementById("dropdown_akhir_kereta");
+// let optionsAwalKereta =
+//     dropdownAwal.getElementsByClassName("optionAwal_kereta");
+// let optionsAkhirKereta =
+//     dropdownAkhir.getElementsByClassName("optionAkhir_kereta");
+// let searchAwalKereta = document.getElementById("searchAwal_kereta");
+// let searchAkhirKereta = document.getElementById("searchAkhir_kereta");
 
 window.addEventListener("DOMContentLoaded", function () {
-    fetchTypeTransportasiData("Pesawat");
+    getTypeTransportasi("Pesawat");
 });
 
 document.getElementById("pesawat").addEventListener("click", (e) => {
     let transportasi = e.target.value;
+    console.log(transportasi)
 
-    fetchTypeTransportasiData(transportasi);
+    getTypeTransportasi(transportasi);
 });
 
 document.getElementById("keretaApi").addEventListener("click", (e) => {
     let transportasi = e.target.value;
+    console.log(transportasi)
 
-    fetchTypeTransportasiData(transportasi);
+    getTypeTransportasi(transportasi);
 });
 
-// function getTypeTransportasi(transportasi) {
+function getTypeTransportasi(transportasi) {
+    fetch(`/getRuteByTypeTransportasi/${transportasi}`)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+        });
+}
+
+// function fetchTypeTransportasiData(transportasi) {
 //     fetch(`/getRuteByTypeTransportasi/${transportasi}`)
 //         .then((response) => response.json())
-//         .then((data) => {
-//             console.log(data);
-//             let selectPesawat = document.getElementById("id_rute");
-//             while (selectPesawat.firstChild) {
-//                 selectPesawat.removeChild(selectPesawat.firstChild);
-//             }
+//         .then((types) => {
+//             // Membuat opsi dropdown
+//             types.forEach(function (type) {
+//                 let optionAwal = document.createElement("div");
+//                 optionAwal.textContent = type.rute_awal;
+//                 optionAwal.className =
+//                     "cursor-pointer p-1 hover:bg-blue-100 optionAwal";
+//                 optionAwal.addEventListener("click", function () {
+//                     searchAwal.value = this.textContent;
+//                     dropdownAwal.style.display = "none";
+//                 });
+//                 dropdownAwal.appendChild(optionAwal);
 
-//             let placeholder = document.createElement("option");
-//             placeholder.text = "Rute";
-//             placeholder.selected = true;
-//             placeholder.disabled = true;
+//                 let optionAkhir = document.createElement("div");
+//                 optionAkhir.textContent = type.rute_akhir;
+//                 optionAkhir.className =
+//                     "cursor-pointer p-1 hover:bg-blue-100 optionAkhir";
+//                 optionAkhir.addEventListener("click", function () {
+//                     searchAkhir.value = this.textContent;
+//                     dropdownAkhir.style.display = "none";
+//                 });
+//                 dropdownAkhir.appendChild(optionAkhir);
 
-//             selectPesawat.add(placeholder);
+//                 // Kereta
+//                 let optionAwal_kereta = document.createElement("div");
+//                 optionAwal_kereta.textContent = type.rute_awal;
+//                 optionAwal_kereta.className =
+//                     "cursor-pointer p-1 hover:bg-blue-100 optionAwal_kereta";
+//                 optionAwal_kereta.addEventListener("click", function () {
+//                     searchAwalKereta.value = this.textContent;
+//                     dropdownAwalKereta.style.display = "none";
+//                 });
+//                 dropdownAwalKereta.appendChild(optionAwal_kereta);
 
-//             data.forEach(function (rute) {
-//                 var option = document.createElement("option");
-//                 option.text = rute.rute_awal + " - " + rute.rute_akhir;
-//                 option.value = rute.id_rute;
-//                 selectPesawat.add(option);
-//             });
-
-//             let selectKereta = document.getElementById("id_rute_kereta");
-//             while (selectKereta.firstChild) {
-//                 selectKereta.removeChild(selectKereta.firstChild);
-//             }
-
-//             let placeholderKereta = document.createElement("option");
-//             placeholderKereta.text = "Rute";
-//             placeholderKereta.selected = true;
-//             placeholderKereta.disabled = true;
-
-//             selectKereta.add(placeholderKereta);
-
-//             data.forEach(function (rute) {
-//                 var option = document.createElement("option");
-//                 option.text = rute.rute_awal + " - " + rute.rute_akhir;
-//                 option.value = rute.id_rute;
-//                 selectKereta.add(option);
+//                 let optionAkhir_kereta = document.createElement("div");
+//                 optionAkhir_kereta.textContent = type.rute_akhir;
+//                 optionAkhir_kereta.className =
+//                     "cursor-pointer p-1 hover:bg-blue-100 optionAkhir_kereta";
+//                 optionAkhir_kereta.addEventListener("click", function () {
+//                     searchAkhirKereta.value = this.textContent;
+//                     dropdownAkhirKereta.style.display = "none";
+//                 });
+//                 dropdownAkhirKereta.appendChild(optionAkhir_kereta);
 //             });
 //         });
 // }
 
-function fetchTypeTransportasiData(transportasi) {
-    fetch(`/getRuteByTypeTransportasi/${transportasi}`)
-        .then((response) => response.json())
-        .then((types) => {
-            // Membuat opsi dropdown
-            types.forEach(function (type) {
-                let optionAwal = document.createElement("div");
-                optionAwal.textContent = type.rute_awal;
-                optionAwal.className =
-                    "cursor-pointer p-1 hover:bg-blue-100 optionAwal";
-                optionAwal.addEventListener("click", function () {
-                    searchAwal.value = this.textContent;
-                    dropdownAwal.style.display = "none";
-                });
-                dropdownAwal.appendChild(optionAwal);
+// // Dropdown search
+// searchAwal.addEventListener("click", function (event) {
+//     dropdownAwal.style.display = "block";
+//     event.stopPropagation();
+// });
+// searchAkhir.addEventListener("click", function (event) {
+//     dropdownAkhir.style.display = "block";
+//     event.stopPropagation();
+// });
 
-                let optionAkhir = document.createElement("div");
-                optionAkhir.textContent = type.rute_akhir;
-                optionAkhir.className =
-                    "cursor-pointer p-1 hover:bg-blue-100 optionAkhir";
-                optionAkhir.addEventListener("click", function () {
-                    searchAkhir.value = this.textContent;
-                    dropdownAkhir.style.display = "none";
-                });
-                dropdownAkhir.appendChild(optionAkhir);
+// // Dropdown search
+// searchAwalKereta.addEventListener("click", function (event) {
+//     dropdownAwalKereta.style.display = "block";
+//     event.stopPropagation();
+// });
+// searchAkhirKereta.addEventListener("click", function (event) {
+//     dropdownAkhirKereta.style.display = "block";
+//     event.stopPropagation();
+// });
 
-                // Kereta
-                let optionAwal_kereta = document.createElement("div");
-                optionAwal_kereta.textContent = type.rute_awal;
-                optionAwal_kereta.className =
-                    "cursor-pointer p-1 hover:bg-blue-100 optionAwal_kereta";
-                optionAwal_kereta.addEventListener("click", function () {
-                    searchAwalKereta.value = this.textContent;
-                    dropdownAwalKereta.style.display = "none";
-                });
-                dropdownAwalKereta.appendChild(optionAwal_kereta);
+// Array.from(optionsAwal).forEach(function (option) {
+//     option.addEventListener("click", function () {
+//         searchAwal.value = this.textContent;
+//         dropdownAwal.style.display = "none";
+//     });
+// });
 
-                let optionAkhir_kereta = document.createElement("div");
-                optionAkhir_kereta.textContent = type.rute_akhir;
-                optionAkhir_kereta.className =
-                    "cursor-pointer p-1 hover:bg-blue-100 optionAkhir_kereta";
-                optionAkhir_kereta.addEventListener("click", function () {
-                    searchAkhirKereta.value = this.textContent;
-                    dropdownAkhirKereta.style.display = "none";
-                });
-                dropdownAkhirKereta.appendChild(optionAkhir_kereta);
-            });
-        });
-}
+// Array.from(optionsAkhir).forEach(function (option) {
+//     option.addEventListener("click", function () {
+//         searchAkhir.value = this.textContent;
+//         dropdownAkhir.style.display = "none";
+//     });
+// });
 
-// Dropdown search
-searchAwal.addEventListener("click", function (event) {
-    dropdownAwal.style.display = "block";
-    event.stopPropagation();
-});
-searchAkhir.addEventListener("click", function (event) {
-    dropdownAkhir.style.display = "block";
-    event.stopPropagation();
-});
+// Array.from(optionsAwalKereta).forEach(function (option) {
+//     option.addEventListener("click", function () {
+//         searchAwalKereta.value = this.textContent;
+//         dropdownAwalKereta.style.display = "none";
+//     });
+// });
 
-// Dropdown search
-searchAwalKereta.addEventListener("click", function (event) {
-    dropdownAwalKereta.style.display = "block";
-    event.stopPropagation();
-});
-searchAkhirKereta.addEventListener("click", function (event) {
-    dropdownAkhirKereta.style.display = "block";
-    event.stopPropagation();
-});
+// Array.from(optionsAkhirKereta).forEach(function (option) {
+//     option.addEventListener("click", function () {
+//         searchAkhirKereta.value = this.textContent;
+//         dropdownAkhirKereta.style.display = "none";
+//     });
+// });
 
-Array.from(optionsAwal).forEach(function (option) {
-    option.addEventListener("click", function () {
-        searchAwal.value = this.textContent;
-        dropdownAwal.style.display = "none";
-    });
-});
+// searchAwal.addEventListener("keyup", filterFunctionAwal);
+// searchAkhir.addEventListener("keyup", filterFunctionAkhir);
 
-Array.from(optionsAkhir).forEach(function (option) {
-    option.addEventListener("click", function () {
-        searchAkhir.value = this.textContent;
-        dropdownAkhir.style.display = "none";
-    });
-});
+// searchAwalKereta.addEventListener("keyup", filterFunctionAwalKereta);
+// searchAkhirKereta.addEventListener("keyup", filterFunctionAkhirKereta);
 
-Array.from(optionsAwalKereta).forEach(function (option) {
-    option.addEventListener("click", function () {
-        searchAwalKereta.value = this.textContent;
-        dropdownAwalKereta.style.display = "none";
-    });
-});
+// function filterFunctionAwal() {
+//     var filter = searchAwal.value.toUpperCase();
 
-Array.from(optionsAkhirKereta).forEach(function (option) {
-    option.addEventListener("click", function () {
-        searchAkhirKereta.value = this.textContent;
-        dropdownAkhirKereta.style.display = "none";
-    });
-});
+//     for (var i = 0; i < optionsAwal.length; i++) {
+//         let txtValue = optionsAwal[i].textContent || optionsAwal[i].innerText;
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//             optionsAwal[i].style.display = "";
+//         } else {
+//             optionsAwal[i].style.display = "none";
+//         }
+//     }
+// }
 
-searchAwal.addEventListener("keyup", filterFunctionAwal);
-searchAkhir.addEventListener("keyup", filterFunctionAkhir);
+// function filterFunctionAkhir() {
+//     var filter = searchAkhir.value.toUpperCase();
 
-searchAwalKereta.addEventListener("keyup", filterFunctionAwalKereta);
-searchAkhirKereta.addEventListener("keyup", filterFunctionAkhirKereta);
+//     for (var i = 0; i < optionsAkhir.length; i++) {
+//         let txtValue = optionsAkhir[i].textContent || optionsAkhir[i].innerText;
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//             optionsAkhir[i].style.display = "";
+//         } else {
+//             optionsAkhir[i].style.display = "none";
+//         }
+//     }
+// }
 
-function filterFunctionAwal() {
-    var filter = searchAwal.value.toUpperCase();
+// function filterFunctionAwalKereta() {
+//     var filter = searchAwalKereta.value.toUpperCase();
 
-    for (var i = 0; i < optionsAwal.length; i++) {
-        let txtValue = optionsAwal[i].textContent || optionsAwal[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            optionsAwal[i].style.display = "";
-        } else {
-            optionsAwal[i].style.display = "none";
-        }
-    }
-}
+//     for (var i = 0; i < optionsAwalKereta.length; i++) {
+//         let txtValue =
+//             optionsAwalKereta[i].textContent || optionsAwalKereta[i].innerText;
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//             optionsAwalKereta[i].style.display = "";
+//         } else {
+//             optionsAwalKereta[i].style.display = "none";
+//         }
+//     }
+// }
 
-function filterFunctionAkhir() {
-    var filter = searchAkhir.value.toUpperCase();
+// function filterFunctionAkhirKereta() {
+//     var filter = searchAkhirKereta.value.toUpperCase();
 
-    for (var i = 0; i < optionsAkhir.length; i++) {
-        let txtValue = optionsAkhir[i].textContent || optionsAkhir[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            optionsAkhir[i].style.display = "";
-        } else {
-            optionsAkhir[i].style.display = "none";
-        }
-    }
-}
+//     for (var i = 0; i < optionsAkhirKereta.length; i++) {
+//         let txtValue =
+//             optionsAkhirKereta[i].textContent ||
+//             optionsAkhirKereta[i].innerText;
+//         if (txtValue.toUpperCase().indexOf(filter) > -1) {
+//             optionsAkhirKereta[i].style.display = "";
+//         } else {
+//             optionsAkhirKereta[i].style.display = "none";
+//         }
+//     }
+// }
 
-function filterFunctionAwalKereta() {
-    var filter = searchAwalKereta.value.toUpperCase();
+// window.addEventListener("click", function () {
+//     dropdownAwal.style.display = "none";
+//     dropdownAkhir.style.display = "none";
 
-    for (var i = 0; i < optionsAwalKereta.length; i++) {
-        let txtValue =
-            optionsAwalKereta[i].textContent || optionsAwalKereta[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            optionsAwalKereta[i].style.display = "";
-        } else {
-            optionsAwalKereta[i].style.display = "none";
-        }
-    }
-}
-
-function filterFunctionAkhirKereta() {
-    var filter = searchAkhirKereta.value.toUpperCase();
-
-    for (var i = 0; i < optionsAkhirKereta.length; i++) {
-        let txtValue =
-            optionsAkhirKereta[i].textContent ||
-            optionsAkhirKereta[i].innerText;
-        if (txtValue.toUpperCase().indexOf(filter) > -1) {
-            optionsAkhirKereta[i].style.display = "";
-        } else {
-            optionsAkhirKereta[i].style.display = "none";
-        }
-    }
-}
-
-window.addEventListener("click", function () {
-    dropdownAwal.style.display = "none";
-    dropdownAkhir.style.display = "none";
-
-    dropdownAwalKereta.style.display = "none";
-    dropdownAkhirKereta.style.display = "none";
-});
+//     dropdownAwalKereta.style.display = "none";
+//     dropdownAkhirKereta.style.display = "none";
+// });
 
 // fetch("/getRuteByTypeTransportasi?nama_type=")
 //     .then((response) => response.json())

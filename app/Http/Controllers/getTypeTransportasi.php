@@ -44,4 +44,38 @@ class getTypeTransportasi extends Controller
             'keterangan' => $type_transportasi->keterangan,
         ]);
     }
+    public function getTypeTransportasiRute($transportasi, $rute_awal, $rute_akhir)
+{
+    // Cari jenis transportasi berdasarkan nama_type
+    $types = type_transportasi::where('nama_type', $transportasi)->get();
+
+    // Jika jenis transportasi tidak ditemukan, kembalikan pesan error
+    if ($types->isEmpty()) {
+        return response()->with(
+            'error', 'Transportasi tidak ditemukan.',
+        );
+    }
+
+    // Cari rute berdasarkan rute_awal dan rute_akhir
+    $rute = Rute::where('rute_awal', $rute_awal)
+        ->where('rute_akhir', $rute_akhir)
+        ->whereIn('id_type_transportasi', $types->pluck('id_type_transportasi'))
+        ->first();
+
+    // Jika rute tidak ditemukan, kembalikan pesan error
+    if (!$rute) {
+        return response()->with(
+            'error', 'Transportasi tidak ditemukan.',
+        );
+    }
+
+    // Ambil type_transportasi dari rute
+    $type_transportasi = $rute->type_transportasi;
+
+    // Kembalikan id_type_transportasi dan keterangan sebagai response JSON
+    return response()->json([
+        'id_type_transportasi' => $type_transportasi->id_type_transportasi,
+        'keterangan' => $type_transportasi->keterangan,
+    ]);
+}
 }
