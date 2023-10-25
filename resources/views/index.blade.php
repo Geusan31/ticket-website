@@ -1,6 +1,7 @@
 @extends('layouts.main')
 
 @section('container')
+    <input type="text" id="kode_pemesanan" >
     @if (session()->has('alert'))
         <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
             role="alert">
@@ -103,7 +104,7 @@
                     <!-- Tombol pemilihan kursi dari k1 hingga k10 -->
                     <div class="grid grid-cols-5 gap-4">
                         @for ($i = 1; $i <= 10; $i++)
-                            <button data-modal-hide="pilihKursiModal" class="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none">
+                            <button data-modal-hide="pilihKursiModal" class="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none" id="k{{ $i }}">
                                 k{{ $i }}
                             </button>
                         @endfor
@@ -195,8 +196,8 @@
                     @enderror
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit" data-modal-target="staticModal" data-modal-toggle="staticModal"
-                    data-session="{{ session('success') }}" id="button"
+                <button type="submit"
+                    data-session="{{ session('success') }}" data-kodePemesanan="{{ session('kode_pemesanan') }}" data-tanggalPemesanan="{{ session('tanggal_pemesanan') }}" data-idPemesanan="{{ session('id_pemesanan') }}" data-idTransportasi="{{ session('id_transportasi') }}" data-jamBerangkat="{{ session('jam_berangkat') }}" data-jamCekin="{{ session('jam_cekin') }}" data-idPetugas="{{ session('id_petugas') }}" data-kodePemesanan="{{ session('kode_pemesanan') }}" id="button"
                     class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
             </form>
         </div>

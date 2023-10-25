@@ -78,3 +78,4 @@ Route::post('/pemesanan', [PemesananController::class, 'pesan'])->middleware('ce
 Route::get('/getTransportasi/{id}', [getTransportasiKursi::class, 'getTransportasi']);
 Route::get('/getRuteByTypeTransportasi/{transportasi}', [getTypeTransportasi::class, 'getTypeTransportasi']);
 Route::get('/getTransportasiType/{rute_awal}/{rute_akhir}', [getTypeTransportasi::class, 'getType']);
+Route::post('/update-session', [PemesananController::class, 'pesan_store']);

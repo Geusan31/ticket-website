@@ -45,39 +45,71 @@ function fetchTransportasiType() {
 const button = document.getElementById('button').dataset.session
 const modal = document.getElementById('staticModal')
 const pilihKursi = document.getElementById('pilihKursi')
-pilihKursi.addEventListener('click', function() {
+pilihKursi.addEventListener('click', function () {
     button = false
     const modal = document.getElementById('staticModal');
     modal.style.display = 'none';
 })
 if (button == true) {
-     modal.style.display = 'flex';
+    modal.style.display = 'flex';
 }
+
+const postButtons = document.querySelectorAll('.post-button');
+
+postButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const name = button.dataset.name;
+        const url = button.dataset.url;
+
+        // Buat objek data untuk dikirim dengan permintaan POST
+        const data = { name: name };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+            .then(response => {
+                if (response.ok) {
+                    // Berhasil mengirim data
+                    console.log('Data telah berhasil dikirim');
+                } else {
+                    // Gagal mengirim data
+                    console.error('Gagal mengirim data');
+                }
+            })
+            .catch(error => {
+                console.error('Terjadi kesalahan:', error);
+            });
+    });
+});
 
 
 // document.getElementById("id_rute").addEventListener("change", function (e) {
 //     let rute_awal = e.target.value;
 
-    // fetch("/getTransportasi/" + id_rute)
-    //     .then((response) => response.json())
-    //     .then((data) => {
-    //         console.log(data);
-    //         let inputKodeKursi = document.getElementById("kode_kursi");
-    //         let inputKodeKursiDisplay =
-    //             document.getElementById("kode_kursi_display");
-    //         let inputIdTransportasi =
-    //             document.getElementById("id_transportasi");
-    //         inputKodeKursi.innerHTML = "";
-    //         inputKodeKursiDisplay.innerHTML = "";
+// fetch("/getTransportasi/" + id_rute)
+//     .then((response) => response.json())
+//     .then((data) => {
+//         console.log(data);
+//         let inputKodeKursi = document.getElementById("kode_kursi");
+//         let inputKodeKursiDisplay =
+//             document.getElementById("kode_kursi_display");
+//         let inputIdTransportasi =
+//             document.getElementById("id_transportasi");
+//         inputKodeKursi.innerHTML = "";
+//         inputKodeKursiDisplay.innerHTML = "";
 
-    //         data.transportasis.forEach(function (transportasi) {
-    //             inputKodeKursiDisplay.value =
-    //                 transportasi.kode + " - " + transportasi.jumlah_kursi;
-    //             inputKodeKursi.value = transportasi.kode;
+//         data.transportasis.forEach(function (transportasi) {
+//             inputKodeKursiDisplay.value =
+//                 transportasi.kode + " - " + transportasi.jumlah_kursi;
+//             inputKodeKursi.value = transportasi.kode;
 
-    //             inputIdTransportasi.value = transportasi.id_type_transportasi;
-    //         });
-    //     });
+//             inputIdTransportasi.value = transportasi.id_type_transportasi;
+//         });
+//     });
 // });
 
 // document
