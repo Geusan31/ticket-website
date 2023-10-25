@@ -41,8 +41,22 @@ function fetchTransportasiType() {
         })
         .catch((error) => console.error("Error:", error));
 }
-document.getElementById("id_rute").addEventListener("change", function (e) {
-    let rute_awal = e.target.value;
+
+const button = document.getElementById('button').dataset.session
+const modal = document.getElementById('staticModal')
+const pilihKursi = document.getElementById('pilihKursi')
+pilihKursi.addEventListener('click', function() {
+    button = false
+    const modal = document.getElementById('staticModal');
+    modal.style.display = 'none';
+})
+if (button == true) {
+     modal.style.display = 'flex';
+}
+
+
+// document.getElementById("id_rute").addEventListener("change", function (e) {
+//     let rute_awal = e.target.value;
 
     // fetch("/getTransportasi/" + id_rute)
     //     .then((response) => response.json())
@@ -64,7 +78,7 @@ document.getElementById("id_rute").addEventListener("change", function (e) {
     //             inputIdTransportasi.value = transportasi.id_type_transportasi;
     //         });
     //     });
-});
+// });
 
 // document
 //     .getElementById("id_rute_kereta")

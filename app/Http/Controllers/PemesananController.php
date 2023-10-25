@@ -79,20 +79,28 @@ class PemesananController extends Controller
             // Ambil data dari tabel rutes dan transportasis
             $transportasi = Transportasi::find($request->id_transportasi);
             $type_transportasi = Type_transportasi::find($rute->id_type_transportasi);
-            // dd($transportasi, $type_transportasi);
 
-            // Simpan data ke dalam session untuk ditampilkan di halaman berikutnya
-            session([
+            return redirect()->back()->with([
                 'success' => true,
+                'kode_pemesanan' => $kodeBaru,
+                'tanggal_pemesanan' => Carbon::now()->format('Y-m-d'),
+                'id_penumpang' => Auth::guard('penumpang')->user()->id_penumpang,
+                'id_transportasi' => $request->id_transportasi,
+                'id_rute' => $rute->id_rute,
+                'tanggal_berangkat' => $result['tanggal_berangkat'],
+                'jam_berangkat' => $jam_berangkat->format('H:i'),
+                'jam_cekin' => $jam_cekin->format('H:i'),
                 'rute_awal' => $rute->rute_awal,
                 'rute_akhir' => $rute->rute_akhir,
                 'jumlah_kursi' => $transportasi->jumlah_kursi,
+                'id_petugas' =>  $randomPetugasId,
                 'tujuan' => $rute->tujuan,
                 'nama_type' => $type_transportasi->nama_type,
             ]);
-            return redirect('/')->with('success');
         }
+    }
 
+    public function pesanStore(Request $request) {
         $pemesanan = pemesanan::create($result);
         // dd($pemesanan->penumpang->nama_penumpang);
 
