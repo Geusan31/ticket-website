@@ -14,9 +14,7 @@
 
 // Dapatkan elemen select untuk rute_awal dan rute_akhir
 let selectRuteAwal = document.querySelector('#id_rute[name="rute_awal"]');
-let selectRuteAkhir = document.querySelector(
-    '#id_rute[name="rute_akhir"]'
-);
+let selectRuteAkhir = document.querySelector('#id_rute[name="rute_akhir"]');
 
 // Tambahkan event listener untuk event change
 selectRuteAwal.addEventListener("change", fetchTransportasiType);
@@ -42,50 +40,84 @@ function fetchTransportasiType() {
         .catch((error) => console.error("Error:", error));
 }
 
-const button = document.getElementById('button').dataset.session
-const modal = document.getElementById('staticModal')
-const pilihKursi = document.getElementById('pilihKursi')
-pilihKursi.addEventListener('click', function () {
-    button = false
-    const modal = document.getElementById('staticModal');
-    modal.style.display = 'none';
-})
-if (button == true) {
-    modal.style.display = 'flex';
+const buttonData = document.getElementById("button");
+const modal = document.getElementById("staticModal");
+const pilihKursi = document.getElementById("pilihKursi");
+pilihKursi.addEventListener("click", function () {
+    buttonData.dataset.session = false;
+    const modal = document.getElementById("staticModal");
+    modal.style.display = "none";
+});
+console.log(buttonData.dataset.session);
+if (buttonData.dataset.session == true) {
+    modal.style.display = "flex";
 }
 
-const postButtons = document.querySelectorAll('.post-button');
+const kursiButtons = document.querySelectorAll(".kursi-button");
 
-postButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const name = button.dataset.name;
-        const url = button.dataset.url;
+kursiButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const kursi = button.dataset.kursi;
+        const url = "/pesan_store";
+        const token = document
+            .querySelector('meta[name="csrf-token"]')
+            .getAttribute("content");
+        console.log(kursi, url);
 
         // Buat objek data untuk dikirim dengan permintaan POST
-        const data = { name: name };
+        const data = {
+            kode_pemesanan: buttonData.dataset.kode_pemesanan,
+            tanggal_pemesanan: buttonData.dataset.tanggal_pemesanan,
+            id_penumpang: buttonData.dataset.id_penumpang,
+            kode_kursi: kursi,
+            id_transportasi: buttonData.dataset.id_transportasi,
+            id_rute: buttonData.dataset.id_rute,
+            tanggal_berangkat: buttonData.dataset.tanggal_berangkat,
+            jam_cekin: buttonData.dataset.jam_cekin,
+            jam_berangkat: buttonData.dataset.jam_berangkat,
+            id_petugas: buttonData.dataset.id_petugas,
+            // CSRF: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        };
+
+        console.log(JSON.stringify(data));
+        console.log(token);
 
         fetch(url, {
-            method: 'POST',
+            method: "POST",
             headers: {
-                'Content-Type': 'application/json',
+                // 'X-CSRF-Token': document.getElementById('csrf_token').value,
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": token,
             },
+            // credentials: "same-origin",
             body: JSON.stringify(data),
         })
-            .then(response => {
+            .then((response) => {
+                // Cetak semua header
+                // for (let [key, value] of response.headers.entries()) {
+                //     console.log(`${key} = ${value}`);
+                // }
+                // document.getElementById('csrf_token').value = response
+                console.log(response);
                 if (response.ok) {
                     // Berhasil mengirim data
-                    console.log('Data telah berhasil dikirim');
+                    console.log("Data telah berhasil dikirim");
+                    return response.text()
                 } else {
                     // Gagal mengirim data
-                    console.error('Gagal mengirim data');
+                    console.error("Gagal mengirim data");
                 }
             })
-            .catch(error => {
-                console.error('Terjadi kesalahan:', error);
+            .then(data => {
+                if(data === 'Pesanan berhasil') {
+                    window.location.href = '/order'
+                }
+            })
+            .catch((error) => {
+                console.error("Terjadi kesalahan:", error);
             });
     });
 });
-
 
 // document.getElementById("id_rute").addEventListener("change", function (e) {
 //     let rute_awal = e.target.value;

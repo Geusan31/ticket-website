@@ -1,7 +1,6 @@
 @extends('layouts.main')
 
 @section('container')
-    <input type="text" id="kode_pemesanan" >
     @if (session()->has('alert'))
         <div class="fixed z-50 shadow-lg right-60 left-60 top-52 flex items-center p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50"
             role="alert">
@@ -31,9 +30,8 @@
             </div>
         </div>
     @endif
-    {{-- @dd(isset(session('success')) && session('success')) --}}
     <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-        class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full flex bg-[rgba(0, 0, 0, .5)]">
+        class="fixed top-0 left-0 right-0 z-50 w-full hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[rgba(0, 0, 0, .5)]">
         <div class="relative w-full max-w-2xl max-h-full ">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow">
@@ -66,7 +64,7 @@
                             Tipe Transportasi: {{ session('nama_type') }}
                         </p>
                         <button data-modal-target="pilihKursiModal" data-modal-toggle="pilihKursiModal" data-modal-hide="staticModal" id="pilihKursi"
-                            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                             type="button">
                             Pilih Kursi
                         </button>
@@ -82,14 +80,14 @@
         class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
         <div class="relative w-full max-w-2xl max-h-full">
             <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+            <div class="relative bg-white rounded-lg shadow">
                 <!-- Modal header -->
-                <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                <div class="flex items-start justify-between p-4 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900">
                         Pilih Kursi
                     </h3>
                     <button type="button"
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center"
                         data-modal-hide="pilihKursiModal">
                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                             viewBox="0 0 14 14">
@@ -103,9 +101,9 @@
                 <div class="p-6 space-y-6">
                     <!-- Tombol pemilihan kursi dari k1 hingga k10 -->
                     <div class="grid grid-cols-5 gap-4">
-                        @for ($i = 1; $i <= 10; $i++)
-                            <button data-modal-hide="pilihKursiModal" class="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none" id="k{{ $i }}">
-                                k{{ $i }}
+                        @for ($i = 1; $i <= session('jumlah_kursi'); $i++)
+                            <button data-modal-hide="pilihKursiModal" class="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none kursi-button" data-kursi="K{{ $i }}">
+                                K{{ $i }}
                             </button>
                         @endfor
                     </div>
@@ -113,7 +111,6 @@
             </div>
         </div>
     </div>
-
     <!-- Jumbotron -->
     <div class="relative overflow-hidden bg-cover bg-no-repeat"
         style="background-position: 50%;background-image: url('{{ asset('/assets/img/beach.webp') }}');height: 550px;">
@@ -197,7 +194,7 @@
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
                 <button type="submit"
-                    data-session="{{ session('success') }}" data-kodePemesanan="{{ session('kode_pemesanan') }}" data-tanggalPemesanan="{{ session('tanggal_pemesanan') }}" data-idPemesanan="{{ session('id_pemesanan') }}" data-idTransportasi="{{ session('id_transportasi') }}" data-jamBerangkat="{{ session('jam_berangkat') }}" data-jamCekin="{{ session('jam_cekin') }}" data-idPetugas="{{ session('id_petugas') }}" data-kodePemesanan="{{ session('kode_pemesanan') }}" id="button"
+                    data-session="{{ session('success') }}" data-kode_pemesanan="{{ session('kode_pemesanan') }}" data-id_rute="{{ session('id_rute') }}" data-tanggal_pemesanan="{{ session('tanggal_pemesanan') }}" data-id_penumpang="{{ session('id_penumpang') }}" data-id_transportasi="{{ session('id_transportasi') }}" data-jam_berangkat="{{ session('jam_berangkat') }}" data-jam_cekin="{{ session('jam_cekin') }}" data-id_petugas="{{ session('id_petugas') }}" data-tanggal_berangkat="{{ session('tanggal_berangkat') }}" id="button"
                     class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
             </form>
         </div>

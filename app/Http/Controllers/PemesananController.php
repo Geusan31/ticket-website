@@ -101,8 +101,15 @@ class PemesananController extends Controller
     }
 
     public function pesanStore(Request $request) {
-        $pemesanan = pemesanan::create($result);
-        // dd($pemesanan->penumpang->nama_penumpang);
+        $pemesanan = pemesanan::create($request->all());
+
+        $id_penumpang = Auth::guard('penumpang')->user()->id_penumpang;
+        $orders = Pemesanan::where('id_penumpang', $id_penumpang)->get();
+
+        $total = 0;
+        foreach ($orders as $order) {
+            $total += $order->rute->harga;
+        }
 
         // Set your Merchant Server Key
         \Midtrans\Config::$serverKey = config('midtrans.server_key');
@@ -116,7 +123,7 @@ class PemesananController extends Controller
         $params = array(
             'transaction_details' => array(
                 'order_id' => $pemesanan->id_pemesanan,
-                'gross_amount' => $pemesanan->harga,
+                'gross_amount' => $total,
             ),
             'customer_details' => array(
                 'nama_penumpang' => $pemesanan->penumpang->nama_penumpang,
@@ -130,7 +137,8 @@ class PemesananController extends Controller
         $snapToken = \Midtrans\Snap::getSnapToken($params);
 
         session()->put('snapToken', $snapToken);
-        return redirect('/order')->with('pesanan', 'Pesanan telah dibuat');
+        return response('Pesanan berhasil', 200);
+        // return redirect('/order')->with('pesanan', 'Pesanan telah dibuat');
     }
 
     public function update(Request $request, $id)

@@ -13,7 +13,7 @@ class OrderController extends Controller
         $orders = Pemesanan::where('id_penumpang', $id_penumpang)->get();
 
         $subtotal = $orders->sum(function ($order) {
-            return $order->harga;
+            return $order->rute->harga;
         });
 
         $pajak = 1000;

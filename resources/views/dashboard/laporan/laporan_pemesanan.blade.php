@@ -77,7 +77,7 @@
 
 <body>
     <div class="container">
-        <h1>Laporan Pesanan Berhasil</h1>
+        <h1>Laporan Pemesanan</h1>
         <table class="tabel">
             <thead class="thead text-xs text-gray-700 uppercase bg-gray-50">
                 <tr>

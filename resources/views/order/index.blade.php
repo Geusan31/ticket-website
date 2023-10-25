@@ -44,7 +44,6 @@
                                     <th class="text-left font-semibold">Tujuan</th>
                                     <th class="text-left font-semibold">Rute</th>
                                     <th class="text-left font-semibold">Kode Kursi</th>
-                                    <th class="text-left font-semibold">Qty</th>
                                     <th class="text-left font-semibold">Harga</th>
                                 </tr>
                             </thead>
@@ -64,8 +63,7 @@
                                         <td class="py-4">{{ $order->rute->rute_awal }} - {{ $order->rute->rute_awal }}
                                         </td>
                                         <td class="py-4">{{ $order->transportasi->kode }}</td>
-                                        <td class="py-4">{{ $order->qty }}</td>
-                                        <td class="py-4">Rp.{{ number_format($order->harga, 0, ',', '.') }}</td>
+                                        <td class="py-4">Rp.{{ number_format($order->rute->harga, 0, ',', '.') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
