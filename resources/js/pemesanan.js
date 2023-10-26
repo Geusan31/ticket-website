@@ -104,7 +104,7 @@ kursiButtons.forEach((button) => {
         };
 
         console.log(JSON.stringify(data));
-        console.log(token);
+        // console.log(token);
 
         fetch(url, {
             method: "POST",
@@ -133,6 +133,7 @@ kursiButtons.forEach((button) => {
                 }
             })
             .then(data => {
+                console.log(data)
                 if(data === 'Pesanan berhasil') {
                     window.location.href = '/order'
                 }
