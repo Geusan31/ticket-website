@@ -80,7 +80,7 @@ if (buttonData.dataset.session == true) {
 const kursiButtons = document.querySelectorAll(".kursi-button");
 
 kursiButtons.forEach((button) => {
-    button.addEventListener("click", () => {
+    button.addEventListener("click", async () => {
         const kursi = button.dataset.kursi;
         const url = "/pesan_store";
         const token = document
@@ -106,7 +106,7 @@ kursiButtons.forEach((button) => {
         console.log(JSON.stringify(data));
         // console.log(token);
 
-        fetch(url, {
+        await fetch(url, {
             method: "POST",
             headers: {
                 // 'X-CSRF-Token': document.getElementById('csrf_token').value,

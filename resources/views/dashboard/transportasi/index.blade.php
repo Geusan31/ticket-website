@@ -18,7 +18,7 @@
     <div class="flex justify-between items-center w-full mb-3">
         <a href="/dashboard/transportasi/create"
             class="cursor-pointer text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2">Tambah
-            data rute</a>
+            data transportasi</a>
     </div>
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table class="w-full text-sm text-left text-gray-500">

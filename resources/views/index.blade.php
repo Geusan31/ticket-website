@@ -31,7 +31,7 @@
         </div>
     @endif
     <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true"
-        class="fixed top-0 left-0 right-0 z-50 w-full hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[rgba(0, 0, 0, .5)]">
+        class="fixed top-0 left-0 right-0 z-50 w-full hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full bg-[rgba(0, 0, 0, .5)] justify-center items-center">
         <div class="relative w-full max-w-2xl max-h-full ">
             <!-- Modal content -->
             <div class="relative bg-white rounded-lg shadow">
@@ -63,7 +63,8 @@
                             Tujuan: {{ session('tujuan') }}<br>
                             Tipe Transportasi: {{ session('nama_type') }}
                         </p>
-                        <button data-modal-target="pilihKursiModal" data-modal-toggle="pilihKursiModal" data-modal-hide="staticModal" id="pilihKursi"
+                        <button data-modal-target="pilihKursiModal" data-modal-toggle="pilihKursiModal"
+                            data-modal-hide="staticModal" id="pilihKursi"
                             class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center"
                             type="button">
                             Pilih Kursi
@@ -102,7 +103,9 @@
                     <!-- Tombol pemilihan kursi dari k1 hingga k10 -->
                     <div class="grid grid-cols-5 gap-4">
                         @for ($i = 1; $i <= session('jumlah_kursi'); $i++)
-                            <button data-modal-hide="pilihKursiModal" class="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none kursi-button" data-kursi="K{{ $i }}">
+                            <button data-modal-hide="pilihKursiModal"
+                                class="p-2 bg-blue-500 text-white rounded hover:bg-blue-700 focus:outline-none kursi-button"
+                                data-kursi="K{{ $i }}">
                                 K{{ $i }}
                             </button>
                         @endfor
@@ -120,11 +123,10 @@
                     <h1 class="mt-2 mb-16 text-5xl font-bold tracking-tight md:text-6xl xl:text-7xl">
                         Buat Kenangan Indah di Setiap Perjalanan Anda
                     </h1>
-                    <button type="button"
-                        class="rounded border-2 border-neutral-50 px-[46px] pt-[14px] pb-[12px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-100 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200"
-                        data-te-ripple-init data-te-ripple-color="light">
+                    <a href="#pemesanan"
+                        class="rounded border-2 border-neutral-50 px-[46px] pt-[14px] pb-[12px] text-sm font-medium uppercase leading-normal text-neutral-50 transition duration-150 ease-in-out hover:border-neutral-100 hover:bg-neutral-100 hover:bg-opacity-10 hover:text-neutral-100 focus:border-neutral-100 focus:text-neutral-100 focus:outline-none focus:ring-0 active:border-neutral-200 active:text-neutral-200">
                         Get started
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -194,9 +196,15 @@
                     @enderror
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit"
-                    data-session="{{ session('success') }}" data-kode_pemesanan="{{ session('kode_pemesanan') }}" data-id_rute="{{ session('id_rute') }}" data-tanggal_pemesanan="{{ session('tanggal_pemesanan') }}" data-id_penumpang="{{ session('id_penumpang') }}" data-id_transportasi="{{ session('id_transportasi') }}" data-jam_berangkat="{{ session('jam_berangkat') }}" data-jam_cekin="{{ session('jam_cekin') }}" data-id_petugas="{{ session('id_petugas') }}" data-tanggal_berangkat="{{ session('tanggal_berangkat') }}" id="button"
-                    class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Pesawat</button>
+                <button type="submit" data-session="{{ session('success') }}"
+                    data-kode_pemesanan="{{ session('kode_pemesanan') }}" data-id_rute="{{ session('id_rute') }}"
+                    data-tanggal_pemesanan="{{ session('tanggal_pemesanan') }}"
+                    data-id_penumpang="{{ session('id_penumpang') }}"
+                    data-id_transportasi="{{ session('id_transportasi') }}"
+                    data-jam_berangkat="{{ session('jam_berangkat') }}" data-jam_cekin="{{ session('jam_cekin') }}"
+                    data-id_petugas="{{ session('id_petugas') }}"
+                    data-tanggal_berangkat="{{ session('tanggal_berangkat') }}" id="button"
+                    class="bg-blue-500 text-white px-4 py-2 rounded">Cari ticket Pesawat</button>
             </form>
         </div>
 
@@ -206,7 +214,8 @@
             <form action="/pemesanan" method="post">
                 @csrf
                 <input id="id_transportasi_kereta" type="hidden" readonly name="id_transportasi">
-                <input id="id_type_transportasi_kereta" type="hidden" readonly value="Kereta" name="id_type_transportasi">
+                <input id="id_type_transportasi_kereta" type="hidden" readonly value="Kereta Api"
+                    name="id_type_transportasi">
                 <div class="grid gap-4 md:grid-cols-2">
                     <div>
                         <label for="searchAwal_kereta" class="block mb-2 text-sm font-medium text-gray-900">Rute
@@ -253,8 +262,15 @@
                     @enderror
                 </div>
                 <!-- Tambahkan elemen form lainnya sesuai kebutuhan -->
-                <button type="submit" data-session="{{ session('success') }}" data-kode_pemesanan="{{ session('kode_pemesanan') }}" data-id_rute="{{ session('id_rute') }}" data-tanggal_pemesanan="{{ session('tanggal_pemesanan') }}" data-id_penumpang="{{ session('id_penumpang') }}" data-id_transportasi="{{ session('id_transportasi') }}" data-jam_berangkat="{{ session('jam_berangkat') }}" data-jam_cekin="{{ session('jam_cekin') }}" data-id_petugas="{{ session('id_petugas') }}" data-tanggal_berangkat="{{ session('tanggal_berangkat') }}"
-                    class="bg-blue-500 text-white px-4 py-2 rounded">Pesan ticket Kereta Api</button>
+                <button type="submit" data-session="{{ session('success') }}"
+                    data-kode_pemesanan="{{ session('kode_pemesanan') }}" data-id_rute="{{ session('id_rute') }}"
+                    data-tanggal_pemesanan="{{ session('tanggal_pemesanan') }}"
+                    data-id_penumpang="{{ session('id_penumpang') }}"
+                    data-id_transportasi="{{ session('id_transportasi') }}"
+                    data-jam_berangkat="{{ session('jam_berangkat') }}" data-jam_cekin="{{ session('jam_cekin') }}"
+                    data-id_petugas="{{ session('id_petugas') }}"
+                    data-tanggal_berangkat="{{ session('tanggal_berangkat') }}"
+                    class="bg-blue-500 text-white px-4 py-2 rounded">Cari ticket Kereta Api</button>
             </form>
         </div>
     </div>

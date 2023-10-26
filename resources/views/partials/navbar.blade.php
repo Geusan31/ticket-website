@@ -1,7 +1,7 @@
 <nav class="bg-slate-100 border-gray-200 navbar sticky z-10 top-0">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" class="flex items-center">
-            <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-600">TravelGant</span>
+            <span class="self-center text-2xl font-semibold whitespace-nowrap text-blue-600">TicketPedia</span>
         </a>
         <div class="flex items-center md:order-2">
             @if (Auth::guard('penumpang')->check() || Auth::guard('petugas')->check())

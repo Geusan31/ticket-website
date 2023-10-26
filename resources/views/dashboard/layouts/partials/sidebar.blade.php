@@ -2,7 +2,7 @@
 <div class="fixed left-0 top-0 w-64 h-full bg-gray-900 p-4 z-50 sidebar-menu transition-transform">
     <a href="#" class="flex items-center pb-4 border-b border-b-gray-800">
         <img src="https://placehold.co/32x32" alt="" class="w-8 h-8 rounded object-cover">
-        <span class="text-lg font-bold text-white ml-3">Logo</span>
+        <span class="text-lg font-bold text-white ml-3">TravelPedia</span>
     </a>
     <ul class="mt-4">
         @if (Auth::guard('petugas')->user()->id_level == 1)
