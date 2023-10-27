@@ -37,9 +37,6 @@
                         Jam Berangkat
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Total Bayar
-                    </th>
-                    <th scope="col" class="px-6 py-3">
                         Nama Petugas
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -60,10 +57,11 @@
                             {{ $pemesanan->penumpang->nama_penumpang }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->transportasi->kode }}
+                            {{ $pemesanan->kode_kursi }}
                         </td>
                         <td class="px-6 py-4">
-                            {{ $pemesanan->transportasi->type_transportasi->nama_type }}
+                            {{ $pemesanan->transportasi->type_transportasi->nama_type }} - 
+                            {{ $pemesanan->transportasi->type_transportasi->keterangan }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->rute->tujuan }}
@@ -76,9 +74,6 @@
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->jam_berangkat }}
-                        </td>
-                        <td class="px-6 py-4">
-                            {{ $pemesanan->total_bayar }}
                         </td>
                         <td class="px-6 py-4">
                             {{ $pemesanan->petugas->nama_petugas }}

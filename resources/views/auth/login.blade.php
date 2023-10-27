@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Login</title>
     @vite(['resources/css/auth.css'])
+    <link rel="icon" type="image/x-icon" href="{{ asset('ticket.png') }}">
 </head>
 
 <body>

@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pemesanan;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    public function index() {
+    public function index()
+    {
         $id_penumpang = Auth::guard('penumpang')->user()->id_penumpang;
         $orders = Pemesanan::where('id_penumpang', $id_penumpang)->get();
 
@@ -26,6 +28,9 @@ class OrderController extends Controller
             'subtotal' => $subtotal,
             'pajak' => $pajak,
             'total' => $total,
+            'nama_penumpang' => Auth::guard('penumpang')->user()->nama_penumpang,
+            'alamat_penumpang' => Auth::guard('penumpang')->user()->alamat_penumpang,
+            'tanggal_pemesanan' => Carbon::now()->format('d/m/Y'),
         ]);
     }
 }

@@ -27,13 +27,13 @@ selectRuteAkhir.addEventListener("change", fetchTransportasiType);
 selectRuteAwalKereta.addEventListener("change", fetchTransportasiTypeKereta);
 selectRuteAkhirKereta.addEventListener("change", fetchTransportasiTypeKereta);
 
-function fetchTransportasiType() {
+async function fetchTransportasiType() {
     // Dapatkan nilai yang dipilih pengguna
     let ruteAwal = selectRuteAwal.options[selectRuteAwal.selectedIndex].value;
     let ruteAkhir =
         selectRuteAkhir.options[selectRuteAkhir.selectedIndex].value;
     // Kirim permintaan ke server dengan Fetch API
-    fetch(`/getTransportasiType/${ruteAwal}/${ruteAkhir}`)
+    await fetch(`/getTransportasiType/${ruteAwal}/${ruteAkhir}`)
         .then((response) => response.json())
         .then((data) => {
             // Dapatkan id_type_transportasi dari data yang dikembalikan server
@@ -45,14 +45,14 @@ function fetchTransportasiType() {
         .catch((error) => console.error("Error:", error));
 }
 
-function fetchTransportasiTypeKereta() {
+async function fetchTransportasiTypeKereta() {
     // Dapatkan nilai yang dipilih pengguna
     let ruteAwal = selectRuteAwalKereta.options[selectRuteAwalKereta.selectedIndex].value;
     let ruteAkhir =
         selectRuteAkhirKereta.options[selectRuteAkhirKereta.selectedIndex].value;
 
     // Kirim permintaan ke server dengan Fetch API
-    fetch(`/getTransportasiType/${ruteAwal}/${ruteAkhir}`)
+    await fetch(`/getTransportasiType/${ruteAwal}/${ruteAkhir}`)
         .then((response) => response.json())
         .then((data) => {
             let id_type_transportasi = data.id_type_transportasi;
@@ -100,7 +100,6 @@ kursiButtons.forEach((button) => {
             jam_cekin: buttonData.dataset.jam_cekin,
             jam_berangkat: buttonData.dataset.jam_berangkat,
             id_petugas: buttonData.dataset.id_petugas,
-            // CSRF: document.querySelector('meta[name="csrf-token"]').getAttribute('content')
         };
 
         console.log(JSON.stringify(data));
@@ -109,33 +108,29 @@ kursiButtons.forEach((button) => {
         await fetch(url, {
             method: "POST",
             headers: {
-                // 'X-CSRF-Token': document.getElementById('csrf_token').value,
                 "Content-Type": "application/json",
                 "X-CSRF-TOKEN": token,
             },
-            // credentials: "same-origin",
             body: JSON.stringify(data),
         })
             .then((response) => {
-                // Cetak semua header
-                // for (let [key, value] of response.headers.entries()) {
-                //     console.log(`${key} = ${value}`);
-                // }
-                // document.getElementById('csrf_token').value = response
                 console.log(response);
                 if (response.ok) {
                     // Berhasil mengirim data
                     console.log("Data telah berhasil dikirim");
-                    return response.text()
+                    return response.json()
                 } else {
                     // Gagal mengirim data
                     console.error("Gagal mengirim data");
+                    throw new Error('Network response was not ok');
                 }
             })
             .then(data => {
                 console.log(data)
-                if(data === 'Pesanan berhasil') {
+                if(data.status === 'Pemesanan Berhasil') {
                     window.location.href = '/order'
+                } else {
+                    alert('Id Pemesanan Sudah Digunakan, Silahkan Coba lain waktu')
                 }
             })
             .catch((error) => {
@@ -237,8 +232,8 @@ document.getElementById("keretaApi").addEventListener("click", (e) => {
     getTypeTransportasi(transportasi);
 });
 
-function getTypeTransportasi(transportasi) {
-    fetch(`/getRuteByTypeTransportasi/${transportasi}`)
+async function getTypeTransportasi(transportasi) {
+    await fetch(`/getRuteByTypeTransportasi/${transportasi}`)
         .then((response) => response.json())
         .then((data) => {
             console.log(data);

@@ -154,11 +154,19 @@ class PemesananController extends Controller
             ),
         );
 
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
+        try{
+            $snapToken = \Midtrans\Snap::getSnapToken($params);
+            // return response()->json(['Snap Token' => $pemesanan->id_pemesanan]);
+            session()->put('snapToken', $snapToken);
+            return response()->json(['status' => 'Pemesanan Berhasil'], 200);
+        }catch(\Exception $e) {
+            return response()->json([
+                'Message' => $e->getMessage(),
+                'Order Id' => $pemesanan->id_pemesanan
+            ]);
+            // return $e->getMessage();
+        }
 
-        session()->put('snapToken', $snapToken);
-        // return response()->json(['Snap Token' => $snapToken]);
-        return response('Pesanan berhasil', 200);
         // return redirect('/order')->with('pesanan', 'Pesanan telah dibuat');
     }
 
