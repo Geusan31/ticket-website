@@ -7,6 +7,9 @@ COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
 # Install Git, zip, dan unzip
 RUN apt-get update && apt-get install -y git zip unzip
 
+# Install dependensi untuk ekstensi zip PHP
+RUN apt-get update && apt-get install -y libzip-dev
+
 # Install ekstensi zip PHP
 RUN docker-php-ext-install zip
 
