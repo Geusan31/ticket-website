@@ -25,10 +25,13 @@ RUN composer install
 # Mulai dari image Node.js
 FROM node:18 AS nodejs
 
+WORKDIR /
+
 # Install Node.js dan npm
 RUN echo "NODE Version:" && node --version
 RUN echo "NPM Version:" && npm --version
 
+RUN npm cache clean --force
 
 # Install dependensi JavaScript dengan npm
 RUN npm update && npm install
