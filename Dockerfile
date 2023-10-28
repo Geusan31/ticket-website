@@ -13,6 +13,9 @@ RUN apt-get update && apt-get install -y libzip-dev
 # Install ekstensi zip PHP
 RUN docker-php-ext-install zip
 
+# Install dependensi untuk ekstensi pdo_pgsql
+RUN apt-get update && apt-get install -y libpq-dev
+
 # Install ekstensi pdo_pgsql
 RUN docker-php-ext-install pdo_pgsql
 
