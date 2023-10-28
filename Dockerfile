@@ -25,8 +25,6 @@ RUN composer install
 # Mulai dari image Node.js
 FROM node:20 AS nodejs
 
-WORKDIR /
-
 # Install Node.js dan npm
 RUN echo "NODE Version:" && node --version
 RUN echo "NPM Version:" && npm --version
@@ -38,6 +36,16 @@ RUN npm install
 
 # Build aplikasi dengan npm
 RUN npm run build
+
+# Mulai dari image PHP lagi untuk tahap akhir
+FROM php:8.2-cli
+
+WORKDIR /app
+
+# Copy aplikasi dan dependensi dari tahap sebelumnya
+COPY --from=php /app /app
+COPY --from=nodejs /usr/app/public/js /app/public/js
+COPY --from=nodejs /usr/app/public/css /app/public/css
 
 # Jalankan migration (tambahkan baris ini)
 RUN php artisan migrate --force
