@@ -11,11 +11,18 @@ class Rute extends Model
 {
     use HasFactory;
 
-    public function pemesanan(): HasMany {
-        return $this->hasMany(Pemesanan::class);
+    protected $guarded = ['id_rute'];
+    public $timestamps = false;
+    protected $primaryKey = 'id_rute';
+    protected $table = 'rutes';
+
+    public function pemesanan(): HasMany
+    {
+        return $this->hasMany(Pemesanan::class, 'id_pemesanan');
     }
 
-    public function tranportasi(): BelongsTo {
-        return $this->belongsTo(Transportasi::class);
+    public function type_transportasi(): BelongsTo
+    {
+        return $this->belongsTo(Type_transportasi::class, 'id_type_transportasi');
     }
 }

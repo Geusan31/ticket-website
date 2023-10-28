@@ -23,4 +23,8 @@ class Petugas extends Authenticatable
     public function pemesanan(): HasMany {
         return $this->hasMany(Pemesanan::class);
     }
+
+    public function rute(): HasMany {
+        return $this->hasMany(Rute::class);
+    }
 }

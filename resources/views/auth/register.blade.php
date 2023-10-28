@@ -6,14 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Register</title>
-    @vite(['resources/css/auth.css', 'resources/js/auth.js'])
+    @vite(['resources/css/auth.css'])
+    <link rel="icon" type="image/x-icon" href="{{ asset('ticket.png') }}">
 </head>
 
 <body>
     <div class="w-full min-h-screen">
         <div class="flex min-h-screen flex-row w-full shadow-lg">
             <div class="w-full lg:w-1/2 flex items-center justify-center bg-no-repeat bg-cover bg-center"
-                style="background-image: url('{{ asset('assets/img/aircraft.jpg') }}')">
+                style="background-image: url('{{ asset('assets/img/aircraft.webp') }}')">
                 <div
                     class="w-full h-full flex flex-col p-12 justify-center items-center relative backdrop-brightness-[.4]">
                     <a href="/"
@@ -37,18 +38,6 @@
                 <h2 class="text-3xl mb-4 font-semibold">Buat Akun</h2>
                 <form action="/register" method="post" id="myForm">
                     @csrf
-                    <select id="role" name="role"
-                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2"
-                        value="{{ old('role') }}">
-                        <option selected disabled>Pilih Role</option>
-                        <option value="penumpang">Penumpang</option>
-                        <option value="petugas">Petugas</option>
-                    </select>
-                    @error('role')
-                        <div class="mt-2 mb-4 text-sm text-red-600 dark:text-red-500">
-                            {{ $message }}
-                        </div>
-                    @enderror
                     <div id="penumpangForm" class="block">
                         <div class="grid gap-4 md:grid-cols-2">
                             <div>
@@ -140,58 +129,6 @@
                                 </div>
                             @enderror
                         </div>
-                    </div>
-                    <div id="petugasForm" class="hidden">
-                        <label for="input-group-1" class="block mb-2 text-sm font-medium text-gray-900">Your
-                            Name</label>
-                        <div class="relative mb-3">
-                            <input type="text" id="input-group-1" name="nama_petugas"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 petugasField"
-                                placeholder="Your Name" value="{{ old('nama_petugas') }}">
-                            @error('nama_petugas')
-                                <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <label for="website-admin"
-                            class="block mb-2 text-sm font-medium text-gray-900">Username</label>
-                        <div class="mb-3">
-                            <input type="text" id="website-admin" name="username_petugas"
-                                class="rounded-none rounded-r-lg bg-gray-50 border text-gray-900 focus:ring-blue-500 focus:border-blue-500 block flex-1 min-w-0 w-full text-sm border-gray-300 p-2.5 petugasField"
-                                placeholder="Username" value="{{ old('username_petugas') }}">
-                            @error('username_petugas')
-                                <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="password_petugas"
-                                class="block mb-2 text-sm font-medium text-gray-900">Password</label>
-                            <input type="password" id="password_petugas" name="password_petugas"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 petugasField"
-                                placeholder="•••••••••">
-                            @error('password_petugas')
-                                <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                        <label for="level" class="block mb-2 text-sm font-medium text-gray-900">Level</label>
-                        <select id="level" name="level_petugas"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-3 petugasField"
-                            value="{{ old('level_petugas') }}">
-                            <option selected disabled>Pilih Level</option>
-                            @foreach ($levels as $level)
-                                <option value="{{ $level->id_level }}">{{ $level->nama_level }}</option>
-                            @endforeach
-                        </select>
-                        @error('level_petugas')
-                            <div class="mt-2 text-sm text-red-600 dark:text-red-500">
-                                {{ $message }}
-                            </div>
-                        @enderror
                     </div>
                     <div class="mt-5">
                         <button type="submit"

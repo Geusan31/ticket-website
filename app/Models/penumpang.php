@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 // use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Penumpang extends Authenticatable
 {
@@ -18,6 +19,11 @@ class Penumpang extends Authenticatable
 
     public function pemesanan(): HasMany
     {
-        return $this->hasMany(Pemesanan::class);
+        return $this->hasMany(Pemesanan::class, 'id_pemesanan');
+    }
+
+    public function pembayaran()
+    {
+        return $this->belongsTo(Penumpang::class, 'id_pembayaran');
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('tanggal_lahir');
             $table->enum('jenis_kelamin', ['laki-laki', 'perempuan']);
             $table->string('telephone');
+            $table->boolean('is_logged_in')->default(false);
             $table->rememberToken();
         });
     }

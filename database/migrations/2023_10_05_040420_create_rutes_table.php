@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string("rute_awal");
             $table->string("rute_akhir");
             $table->integer("harga");
-            $table->foreignId("id_transportasi");
+            $table->foreignId("id_type_transportasi");
         });
     }
 
