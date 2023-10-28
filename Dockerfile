@@ -23,7 +23,7 @@ COPY . /app
 RUN composer install
 
 # Mulai dari image Node.js
-FROM node:18 AS nodejs
+FROM node:20 AS nodejs
 
 WORKDIR /
 
