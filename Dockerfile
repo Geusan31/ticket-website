@@ -29,7 +29,6 @@ FROM node:18 AS nodejs
 RUN echo "NODE Version:" && node --version
 RUN echo "NPM Version:" && npm --version
 
-RUN npm cache clean
 
 # Install dependensi JavaScript dengan npm
 RUN npm update && npm install
