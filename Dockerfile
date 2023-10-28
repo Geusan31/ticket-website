@@ -16,10 +16,8 @@ RUN docker-php-ext-install zip
 # Install dependensi untuk ekstensi pdo_pgsql
 RUN apt-get update && apt-get install -y libpq-dev
 
-# Install ekstensi pdo_pgsql
-RUN docker-php-ext-install pdo_pgsql
-
-RUN docker-php-ext-enable pdo_pgsql
+# Install dan aktifkan ekstensi pdo_pgsql
+RUN docker-php-ext-install pdo_pgsql && docker-php-ext-enable pdo_pgsql
 
 # Set working directory
 WORKDIR /app
@@ -29,6 +27,14 @@ COPY . .
 
 # Install dependensi PHP dengan Composer
 RUN composer install
+
+# Cek variabel lingkungan DATABASE_CONNECTION
+RUN echo $DB_CONNECTION
+RUN echo $APP_KEY
+RUN echo $DATABASE_URL
+RUN echo $MIDTRANS_CLIENT_KEY
+RUN echo $MIDTRANS_MERCHANT_ID
+RUN echo $MIDTRANS_SERVER_KEY
 
 # Mulai dari image Node.js
 FROM node:20 AS nodejs
