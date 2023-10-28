@@ -52,8 +52,7 @@ WORKDIR /app
 
 # Copy aplikasi dan dependensi dari tahap sebelumnya
 COPY --from=php /app .
-COPY --from=nodejs /usr/app/public/js ./public/js
-COPY --from=nodejs /usr/app/public/css ./public/css
+COPY --from=nodejs /usr/app/public ./public
 
 # Jalankan migration (tambahkan baris ini)
 RUN php artisan migrate --force
