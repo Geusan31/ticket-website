@@ -61,7 +61,7 @@ COPY --from=php /app .
 COPY --from=nodejs /usr/app/public ./public
 
 # Jalankan migration (tambahkan baris ini)
-RUN php artisan migrate --force
+RUN php artisan migrate
 
 # Jalankan aplikasi
 CMD php -S 0.0.0.0:80 -t public/
