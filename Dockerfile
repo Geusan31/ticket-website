@@ -32,5 +32,8 @@ RUN npm install
 # Build aplikasi dengan npm
 RUN npm run build
 
+# Jalankan migration
+RUN php artisan migrate --force
+
 # Jalankan aplikasi
-CMD php -S 0.0.0.0:8080 -t public/
+CMD php -S 0.0.0.0:80 -t public/
