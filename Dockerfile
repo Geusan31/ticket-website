@@ -34,7 +34,7 @@ RUN echo "NPM Version:" && npm --version
 RUN npm cache clean --force
 
 # Install dependensi JavaScript dengan npm
-RUN npm update && npm install
+RUN npm install -g
 
 # Build aplikasi dengan npm
 RUN npm run build
