@@ -22,9 +22,8 @@ COPY . /app
 # Install dependensi PHP dengan Composer
 RUN composer install
 
-# Install Node.js dan npm
-RUN curl -sL https://deb.nodesource.com/setup_18.14 | bash -
-RUN apt-get install -y nodejs
+# Mulai dari image Node.js
+FROM node:18 AS nodejs
 
 # Install Node.js dan npm
 RUN echo "NODE Version:" && node --version
@@ -36,7 +35,7 @@ RUN npm install
 # Build aplikasi dengan npm
 RUN npm run build
 
-# Jalankan migration
+# Jalankan migration (tambahkan baris ini)
 RUN php artisan migrate --force
 
 # Jalankan aplikasi
