@@ -1,8 +1,14 @@
 # Mulai dari image PHP
 FROM php:8.2-cli
 
-# Install Composer
-COPY --from=composer /usr/bin/composer /usr/bin/composer
+# Install Composer versi 2.5.4
+COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
+
+# Install Git, zip, dan unzip
+RUN apt-get update && apt-get install -y git zip unzip
+
+# Install ekstensi zip PHP
+RUN docker-php-ext-install zip
 
 # Set working directory
 WORKDIR /app
