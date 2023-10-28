@@ -23,7 +23,7 @@ COPY . /app
 RUN composer install
 
 # Install Node.js dan npm
-RUN curl -sL https://deb.nodesource.com/setup_14.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 
 # Install dependensi JavaScript dengan npm
