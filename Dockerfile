@@ -19,6 +19,8 @@ RUN apt-get update && apt-get install -y libpq-dev
 # Install ekstensi pdo_pgsql
 RUN docker-php-ext-install pdo_pgsql
 
+RUN docker-php-ext-enable pdo_pgsql
+
 # Set working directory
 WORKDIR /app
 
