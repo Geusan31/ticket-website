@@ -76,8 +76,8 @@ WORKDIR /app
 COPY --from=php /app .
 COPY --from=nodejs /usr/app/public ./public
 
-# Jalankan migration (tambahkan baris ini)
-RUN php artisan migrate --force
+# Tambahkan skrip entrypoint (misalnya entrypoint.sh)
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
-# Jalankan aplikasi
-CMD php -S 0.0.0.0:80 -t public/
+CMD ["/entrypoint.sh"]
