@@ -44,6 +44,9 @@ RUN echo $MIDTRANS_CLIENT_KEY
 RUN echo $MIDTRANS_MERCHANT_ID
 RUN echo $MIDTRANS_SERVER_KEY
 
+# Cek semua ekstensi PHP yang diaktifkan
+RUN php -m
+
 # Mulai dari image Node.js
 FROM node:20 AS nodejs
 
