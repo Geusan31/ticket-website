@@ -28,8 +28,6 @@ RUN docker-php-ext-install zip
 # Install dependensi untuk ekstensi pdo_pgsql
 RUN apt-get update && apt-get install -y libpq-dev
 
-# Install dan aktifkan ekstensi pgsql
-RUN docker-php-ext-install php_pgsql
 
 # Install dan aktifkan ekstensi pdo_pgsql dan pgsql
 RUN docker-php-ext-install pdo_pgsql pgsql && docker-php-ext-enable pdo_pgsql pgsql
