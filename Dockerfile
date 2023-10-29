@@ -1,6 +1,8 @@
 # Mulai dari image PHP
 FROM php:8.2-cli AS php
 
+RUN php -v
+
 # Tambahkan baris ini
 ARG DB_CONNECTION
 ARG APP_KEY
