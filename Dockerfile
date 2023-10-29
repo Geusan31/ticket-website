@@ -24,6 +24,9 @@ RUN docker-php-ext-install zip
 # Install dependensi untuk ekstensi pdo_pgsql
 RUN apt-get update && apt-get install -y libpq-dev
 
+# Install dan aktifkan ekstensi pgsql
+RUN docker-php-ext-install pgsql && docker-php-ext-enable pgsql
+
 # Install dan aktifkan ekstensi pdo_pgsql
 RUN docker-php-ext-install pdo_pgsql && docker-php-ext-enable pdo_pgsql
 
@@ -45,7 +48,7 @@ RUN echo $MIDTRANS_MERCHANT_ID
 RUN echo $MIDTRANS_SERVER_KEY
 
 # Cek semua ekstensi PHP yang diaktifkan
-RUN php -m
+RUN php -m | grep pgsql
 
 # Mulai dari image Node.js
 FROM node:20 AS nodejs
