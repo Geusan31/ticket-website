@@ -7,9 +7,11 @@ RUN php -v
 ARG DB_CONNECTION
 ARG APP_KEY
 ARG DATABASE_URL
-ARG MIDTRANS_CLIENT_KEY
-ARG MIDTRANS_MERCHANT_ID
-ARG MIDTRANS_SERVER_KEY
+ARG DB_HOST
+ARG DB_PORT
+ARG DB_DATABASE
+ARG DB_USERNAME
+ARG DB_PASSWORD
 
 # Install Composer versi 2.5.4
 COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
@@ -45,9 +47,11 @@ RUN composer install
 RUN echo $DB_CONNECTION
 RUN echo $APP_KEY
 RUN echo $DATABASE_URL
-RUN echo $MIDTRANS_CLIENT_KEY
-RUN echo $MIDTRANS_MERCHANT_ID
-RUN echo $MIDTRANS_SERVER_KEY
+RUN echo $DB_HOST
+RUN echo $DB_PORT
+RUN echo $DB_DATABASE
+RUN echo $DB_USERNAME
+RUN echo $DB_PASSWORD
 
 # Cek semua ekstensi PHP yang diaktifkan
 RUN php -m | grep pgsql
