@@ -94,15 +94,15 @@
 # CMD ["/entrypoint.sh"]
 
 FROM richarvey/nginx-php-fpm:1.7.2
-FROM php:8.2-cli AS php
+# Use an official PHP runtime as a parent image
+FROM php:8.2-fpm
 
-# # Install Composer
-COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
-
-# FROM composer:2.5 AS composer
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js
-FROM node:20
+RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN apt-get install -y nodejs
 
 # Set the working directory in the container to /var/www
 WORKDIR /var/www
@@ -110,25 +110,11 @@ WORKDIR /var/www
 # Copy the current directory contents into the container at /var/www
 COPY . /var/www
 
-# Image config
-ENV SKIP_COMPOSER 1
-ENV WEBROOT /var/www/html/public
-ENV PHP_ERRORS_STDERR 1
-ENV RUN_SCRIPTS 1
-ENV REAL_IP_HEADER 1
-
-# Laravel config
-ENV APP_ENV production
-ENV APP_DEBUG false
-ENV LOG_CHANNEL stderr
-
-# Allow composer to run as root
-ENV COMPOSER_ALLOW_SUPERUSER 1
-
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+# Give permissions for the entrypoint.sh file to execute
+RUN chmod +x /var/www/entrypoint.sh
 
 # Make port 80 available to the world outside this container
 EXPOSE 80
 
-CMD ["/entrypoint.sh"]
+# Run entrypoint.sh when the container launches
+CMD ["/var/www/entrypoint.sh"]
