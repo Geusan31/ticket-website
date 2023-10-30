@@ -94,10 +94,12 @@
 # CMD ["/entrypoint.sh"]
 
 FROM richarvey/nginx-php-fpm:1.7.2
-FROM php:8.2-fpm
+FROM php:8.2-cli AS php
 
 # # Install Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+
+FROM composer:2.5 AS composer
 
 # Install Node.js
 FROM node:20
