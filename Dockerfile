@@ -104,9 +104,12 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN apt-get update && apt-get install -y \
     software-properties-common \
     npm
-RUN npm install npm@latest -g && \
-    npm install n -g && \
-    n latest
+RUN npm cache clean -f && \
+    npm install -g n && \
+    n stable
+
+# Check Node.js and npm version
+RUN node -v && npm -v
 
 # Set the working directory in the container to /var/www
 WORKDIR /var/www
