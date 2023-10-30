@@ -135,8 +135,5 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Give permissions for the entrypoint.sh file to execute
 RUN chmod +x /var/www/entrypoint.sh
 
-# Make port 80 available to the world outside this container
-EXPOSE 80
-
 # Run entrypoint.sh when the container launches
 CMD ["/var/www/entrypoint.sh"]
