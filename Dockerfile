@@ -96,13 +96,17 @@
 FROM richarvey/nginx-php-fpm:1.7.2
 FROM php:8.2-fpm
 
-# # Install Composer versi 2.5.4
-COPY --from=composer:2.5.4 /usr/bin/composer /usr/bin/composer
+# # Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js
 FROM node:20
 
-COPY . .
+# Set the working directory in the container to /var/www
+WORKDIR /var/www
+
+# Copy the current directory contents into the container at /var/www
+COPY . /var/www
 
 # Image config
 ENV SKIP_COMPOSER 1
@@ -119,7 +123,9 @@ ENV LOG_CHANNEL stderr
 # Allow composer to run as root
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
-COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+# Make port 80 available to the world outside this container
+EXPOSE 80
 
 CMD ["/entrypoint.sh"]
