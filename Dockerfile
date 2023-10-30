@@ -94,6 +94,7 @@
 # CMD ["/entrypoint.sh"]
 
 FROM richarvey/nginx-php-fpm:1.7.2
+FROM php:8.2-fpm
 
 COPY . .
 
