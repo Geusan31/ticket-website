@@ -93,7 +93,7 @@
 
 # CMD ["/entrypoint.sh"]
 
-FROM richarvey/nginx-php-fpm:1.7.2
+# FROM richarvey/nginx-php-fpm:1.7.2
 # Use an official PHP runtime as a parent image
 FROM php:8.2-fpm
 
@@ -101,7 +101,7 @@ FROM php:8.2-fpm
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Install Node.js
-RUN curl -sL https://deb.nodesource.com/setup_16.x | bash -
+RUN curl -sL https://deb.nodesource.com/setup_18.x | bash -
 RUN apt-get install -y nodejs
 
 # Set the working directory in the container to /var/www
