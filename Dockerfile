@@ -151,5 +151,8 @@ ENV COMPOSER_ALLOW_SUPERUSER 1
 # Give permissions for the entrypoint.sh file to execute
 RUN chmod +x /var/www/entrypoint.sh
 
+# Run composer install before launching the application
+RUN composer install
+
 # Run entrypoint.sh when the container launches
 CMD ["/var/www/entrypoint.sh"]
