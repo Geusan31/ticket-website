@@ -143,7 +143,7 @@ WORKDIR /var/www/html
 COPY . /var/www/html
 
 # Image config
-ENV SKIP_COMPOSER 0
+ENV SKIP_COMPOSER 1
 ENV WEBROOT /var/www/html/public
 ENV PHP_ERRORS_STDERR 1
 ENV RUN_SCRIPTS 1
@@ -158,10 +158,10 @@ ENV LOG_CHANNEL stderr
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Give permissions for the entrypoint.sh file to execute
-RUN chmod +x /var/www/html/entrypoint.sh
+# RUN chmod +x /var/www/html/entrypoint.sh
 
 # Run composer install before launching the application
-RUN composer install
+# RUN composer install
 
 # Run entrypoint.sh when the container launches
-CMD ["/var/www/html/entrypoint.sh"]
+CMD ["/start.sh"]
