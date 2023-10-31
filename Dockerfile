@@ -95,52 +95,56 @@
 
 # FROM richarvey/nginx-php-fpm:1.7.2
 # Use an official PHP runtime as a parent image
-FROM php:8.2-fpm
+# FROM php:8.2-fpm
 
-# Install system dependencies
-RUN apt-get update && apt-get install -y \
-    git \
-    curl \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libpq-dev \
-    zip \
-    unzip
+# # Install system dependencies
+# RUN apt-get update && apt-get install -y \
+#     git \
+#     curl \
+#     libpng-dev \
+#     libonig-dev \
+#     libxml2-dev \
+#     libpq-dev \
+#     zip \
+#     unzip
 
-# Clear cache
-RUN apt-get clean && rm -rf /var/lib/apt/lists/*
+# # Clear cache
+# RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# # Install PHP extensions
+# RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install PHP extensions
-RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+# # Install PHP extensions
+# RUN docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
-# Install PostgreSQL extensions
-RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
-    && docker-php-ext-install pdo_pgsql pgsql \
-    && docker-php-ext-enable pdo_pgsql pgsql
+# # Install PostgreSQL extensions
+# RUN docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+#     && docker-php-ext-install pdo_pgsql pgsql \
+#     && docker-php-ext-enable pdo_pgsql pgsql
 
-# Install Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+# # Install Composer
+# RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
-# Install Node.js
-RUN apt-get update && apt-get install -y \
-    software-properties-common \
-    npm
-RUN npm cache clean -f && \
-    npm install -g n && \
-    n stable
+# # Install Node.js
+# RUN apt-get update && apt-get install -y \
+#     software-properties-common \
+#     npm
+# RUN npm cache clean -f && \
+#     npm install -g n && \
+#     n stable
 
-# Check Node.js and npm version
-RUN node -v && npm -v
+# # Check Node.js and npm version
+# RUN node -v && npm -v
 
-# Set the working directory in the container to /var/www
-WORKDIR /var/www/html
+# # Set the working directory in the container to /var/www
+# WORKDIR /var/www/html
 
-# Copy the current directory contents into the container at /var/www
-COPY . /var/www/html
+# # Copy the current directory contents into the container at /var/www
+# COPY . /var/www/html
+
+FROM richarvey/nginx-php-fpm:1.7.2
+
+COPY . .
 
 # Image config
 ENV SKIP_COMPOSER 1
