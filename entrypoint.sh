@@ -17,4 +17,4 @@ php artisan route:cache
 echo "Running migrations..."
 php artisan migrate --force
 
-php artisan serve --host=0.0.0.0 --port=8000
+php -S 0.0.0.0:80 -t public/
