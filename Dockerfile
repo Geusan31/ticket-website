@@ -137,10 +137,10 @@ RUN npm cache clean -f && \
 RUN node -v && npm -v
 
 # Set the working directory in the container to /var/www
-WORKDIR /var/www
+WORKDIR /var/www/html
 
 # Copy the current directory contents into the container at /var/www
-COPY . /var/www
+COPY . /var/www/html
 
 # Image config
 ENV SKIP_COMPOSER 0
@@ -158,10 +158,10 @@ ENV LOG_CHANNEL stderr
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 # Give permissions for the entrypoint.sh file to execute
-# RUN chmod +x /var/www/entrypoint.sh
+RUN chmod +x /var/www/entrypoint.sh
 
 # Run composer install before launching the application
 RUN composer install
 
 # Run entrypoint.sh when the container launches
-CMD ["/start.sh"]
+CMD ["/var/www/entrypoint.sh"]
